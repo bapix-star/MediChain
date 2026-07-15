@@ -161,7 +161,7 @@ export default {
 			'subtle-pulse': 'subtlePulse 2.5s infinite',
 			'glow-pulse': 'glowPulse 2s infinite ease-in-out',
 			'bg-shimmer': 'bgShimmer 1.5s infinite linear',
-			'marquee': 'marquee 45s linear infinite'
+			'marquee': 'marquee 120s linear infinite'
 		}
   	}
   },
