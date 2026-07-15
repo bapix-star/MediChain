@@ -190,18 +190,18 @@ export default function Home() {
           <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-surface-container-lowest to-transparent z-20 pointer-events-none"></div>
           <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-surface-container-lowest to-transparent z-20 pointer-events-none"></div>
           
-          <div className="flex animate-marquee whitespace-nowrap opacity-60 hover:opacity-100 transition-opacity duration-300" style={{ animationDuration: '180s' }}>
+          <div className="flex animate-marquee whitespace-nowrap opacity-100 transition-opacity duration-300" style={{ animationDuration: '40s' }}>
             {[...Array(2)].map((_, i) => (
               <div key={i} className="flex items-center gap-16 mx-8">
-                <img src="/logos/Acadia_rgb_primary_gradient.png" alt="Acadia" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
-                <img src="/logos/Akeso.svg" alt="Akeso" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
-                <img src="/logos/Allergan_logo.svg" alt="Allergan" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
-                <img src="/logos/Cetaphil_Thailand_Logo.png" alt="Cetaphil" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
-                <img src="/logos/Chiesi_Logo_-_1.Primary_pantoni_RGB.jpg" alt="Chiesi" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
-                <img src="/logos/Hansoh_Pharmaceutical.svg" alt="Hansoh" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
-                <img src="/logos/I3_Consult_Logo.jpg" alt="I3 Consult" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
-                <img src="/logos/National_Pharmacy_Association_Logo.svg" alt="NPA" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
-                <img src="/logos/Orion_pharma_logo_(2025-).svg" alt="Orion" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
+                <img src="/logos/Acadia_rgb_primary_gradient.png" alt="Acadia" className="h-12 w-auto object-contain shrink-0 rounded" />
+                <img src="/logos/Akeso.svg" alt="Akeso" className="h-12 w-auto object-contain shrink-0 rounded" />
+                <img src="/logos/Allergan_logo.svg" alt="Allergan" className="h-12 w-auto object-contain shrink-0 rounded" />
+                <img src="/logos/Cetaphil_Thailand_Logo.png" alt="Cetaphil" className="h-12 w-auto object-contain shrink-0 rounded" />
+                <img src="/logos/Chiesi_Logo_-_1.Primary_pantoni_RGB.jpg" alt="Chiesi" className="h-12 w-auto object-contain shrink-0 rounded" />
+                <img src="/logos/Hansoh_Pharmaceutical.svg" alt="Hansoh" className="h-12 w-auto object-contain shrink-0 rounded" />
+                <img src="/logos/I3_Consult_Logo.jpg" alt="I3 Consult" className="h-12 w-auto object-contain shrink-0 rounded" />
+                <img src="/logos/National_Pharmacy_Association_Logo.svg" alt="NPA" className="h-12 w-auto object-contain shrink-0 rounded" />
+                <img src="/logos/Orion_pharma_logo_(2025-).svg" alt="Orion" className="h-12 w-auto object-contain shrink-0 rounded" />
               </div>
             ))}
           </div>
