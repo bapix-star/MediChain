@@ -34,6 +34,7 @@ export async function processScan(data: {
     }
 
     const itemDetails = {
+      id: item.id,
       medicineName: item.batch.medicineName,
       manufacturer: item.batch.manufacturer,
       expiryDate: item.batch.expiryDate,

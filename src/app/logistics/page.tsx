@@ -232,16 +232,16 @@ export default function LogisticsDashboard() {
                         <span className="font-label-caps text-label-caps text-on-surface-variant block mb-1">BATCH</span>
                         <span className="font-data-mono text-data-mono text-on-surface bg-surface px-2 py-1 rounded inline-block">{scanResult.itemDetails.batchNumber}</span>
                       </div>
-                      {!scanResult.isCounterfeit && scanResult.txHash && (
+                      {!scanResult.isCounterfeit && scanResult.itemDetails?.id && (
                         <>
                           <hr className="border-outline-variant/20" />
                           <div className="mt-4 p-4 bg-primary/5 rounded-lg border border-primary/20">
                             <span className="font-label-caps text-label-caps text-on-surface-variant block mb-2 flex items-center gap-2">
                               <span className="material-symbols-outlined text-[16px] text-primary">verified</span>
-                              STELLAR NETWORK VERIFICATION
+                              FULL VERIFICATION PORTAL
                             </span>
-                            <a href={`https://stellar.expert/explorer/testnet/tx/${scanResult.txHash}`} target="_blank" rel="noreferrer" className="text-primary font-medium hover:underline flex items-center gap-1 transition-all">
-                              View Transaction on Explorer <span className="material-symbols-outlined text-[16px]">open_in_new</span>
+                            <a href={`/item/${scanResult.itemDetails.id}`} target="_blank" rel="noreferrer" className="text-primary font-medium hover:underline flex items-center gap-1 transition-all">
+                              View Complete Product History <span className="material-symbols-outlined text-[16px]">open_in_new</span>
                             </a>
                           </div>
                         </>
