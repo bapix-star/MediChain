@@ -11,6 +11,8 @@ import * as THREE from "three";
 
 export default function Home() {
   const canvasRef = useRef<HTMLDivElement>(null);
+  const { address } = useWalletStore();
+  const isConnected = !!address;
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -122,6 +124,11 @@ export default function Home() {
             <button className="text-on-surface-variant hover:bg-surface-container-high/50 transition-colors p-2 rounded-full hidden md:block">
               <span className="material-symbols-outlined">notifications</span>
             </button>
+            {isConnected && (
+              <Link href="/profile" className="text-on-surface-variant hover:text-primary hover:bg-surface-container-high/50 transition-colors p-2 rounded-full hidden md:block" title="My Profile">
+                <span className="material-symbols-outlined">account_circle</span>
+              </Link>
+            )}
             <WalletConnect />
           </div>
         </div>

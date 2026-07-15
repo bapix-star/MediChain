@@ -119,7 +119,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   }, []);
 
   const navLinks = [
-    { name: "Dashboard", href: "/", icon: "dashboard" },
+    { name: "Home", href: "/", icon: "dashboard" },
     { name: "Registry", href: "/manufacturer", icon: "inventory_2" },
     { name: "Shipments", href: "/logistics", icon: "local_shipping" },
     { name: "Explorer", href: "/explorer", icon: "database", fill: true },
