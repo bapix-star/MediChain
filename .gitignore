@@ -39,3 +39,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/src/generated/prisma
+
+# Rust/Soroban
+contracts/target/
+target/
+
+# Prisma
+prisma/dev.db
+prisma/dev.db-journal
+
+# Temp
+check_*
+*.js
+*.mjs
