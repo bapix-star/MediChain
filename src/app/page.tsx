@@ -193,16 +193,15 @@ export default function Home() {
           <div className="flex animate-marquee whitespace-nowrap opacity-60 hover:opacity-100 transition-opacity duration-300">
             {[...Array(2)].map((_, i) => (
               <div key={i} className="flex items-center gap-16 mx-8">
-                <span className="font-display-lg text-2xl font-bold tracking-tight text-on-surface-variant">Sun Pharma</span>
-                <span className="font-display-lg text-2xl font-black italic tracking-tighter text-on-surface-variant">Cipla</span>
-                <span className="font-display-lg text-2xl font-bold tracking-tight text-on-surface-variant">Dr.Reddy's</span>
-                <span className="font-headline-lg text-2xl font-semibold tracking-wide text-on-surface-variant">LUPIN</span>
-                <span className="font-display-lg text-2xl font-bold tracking-tight text-on-surface-variant">PFIZER</span>
-                <span className="font-headline-lg text-2xl font-bold text-on-surface-variant">NOVARTIS</span>
-                <span className="font-display-lg text-2xl font-black text-on-surface-variant">Roche</span>
-                <span className="font-headline-lg text-2xl font-semibold tracking-tight text-on-surface-variant">gsk</span>
-                <span className="font-display-lg text-2xl font-bold tracking-tight text-on-surface-variant">sanofi</span>
-                <span className="font-headline-lg text-2xl font-black text-on-surface-variant">Abbott</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Pfizer_%282021%29.svg" alt="Pfizer" className="h-8 md:h-10 object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/01/Novartis_logo.svg" alt="Novartis" className="h-6 md:h-8 object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f5/Hoffmann-La_Roche_logo.svg" alt="Roche" className="h-8 md:h-10 object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/GlaxoSmithKline.svg" alt="GSK" className="h-8 md:h-10 object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Sanofi_logo_2022.svg" alt="Sanofi" className="h-8 md:h-10 object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Abbott_Laboratories_logo.svg" alt="Abbott" className="h-6 md:h-8 object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Johnson_and_Johnson_Logo.svg" alt="Johnson & Johnson" className="h-8 md:h-10 object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/1a/AstraZeneca_logo.svg" alt="AstraZeneca" className="h-8 md:h-10 object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Bayer_Logo.svg" alt="Bayer" className="h-8 md:h-10 object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" />
               </div>
             ))}
           </div>
