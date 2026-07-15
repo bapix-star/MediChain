@@ -92,6 +92,9 @@ export default function LogisticsDashboard() {
     
     if (!result.success) {
       toast.error(result.error || "Failed to process scan");
+      if (result.itemDetails || result.isCounterfeit) {
+        setScanResult(result);
+      }
     } else {
       if (result.isCounterfeit) {
         toast.error("COUNTERFEIT ANOMALY DETECTED!", { duration: 5000 });
