@@ -6,6 +6,8 @@ export async function createBatch(data: {
   batchNumber: string;
   medicineName: string;
   manufacturer: string;
+  brandName: string;
+  factoryAddress: string;
   composition: string;
   quantity: number;
   manufacturingDate: Date;
@@ -20,6 +22,8 @@ export async function createBatch(data: {
         batchNumber: data.batchNumber,
         medicineName: data.medicineName,
         manufacturer: data.manufacturer,
+        brandName: data.brandName,
+        factoryAddress: data.factoryAddress,
         composition: data.composition,
         quantity: data.quantity,
         manufacturingDate: data.manufacturingDate,

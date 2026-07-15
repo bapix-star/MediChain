@@ -76,7 +76,7 @@ export default async function ItemPassport({ params }: { params: Promise<{ id: s
                 <span className="text-sm font-medium text-gray-600">Brand Name :</span>
               </div>
               <div className="text-sm font-bold text-gray-900">
-                {item.batch.medicineName.split(' ')[0]} +
+                {item.batch.brandName || (item.batch.medicineName.split(' ')[0] + " +")}
               </div>
             </div>
 
@@ -87,7 +87,7 @@ export default async function ItemPassport({ params }: { params: Promise<{ id: s
                 <span className="text-sm font-medium text-gray-600">Name And Address Of The Manufacturer :</span>
               </div>
               <div className="text-sm font-bold text-gray-900">
-                {item.batch.manufacturer}
+                {item.batch.factoryAddress || item.batch.manufacturer}
               </div>
             </div>
 

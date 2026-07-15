@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useWalletStore } from "@/store/useWalletStore";
 import { toast } from "sonner";
 import { createBatch } from "@/actions/batch";
+import { getProfile, createProfile } from "@/actions/profile";
 import { AppShell } from "@/components/layout/AppShell";
 import { Horizon, TransactionBuilder, Networks, Operation } from "@stellar/stellar-sdk";
 import QRCode from "react-qr-code";
@@ -15,9 +16,53 @@ const server = new Horizon.Server("https://horizon-testnet.stellar.org");
 export default function ManufacturerDashboard() {
   const { address, isConnected, signTransaction, submitTransaction } = useWalletStore();
   const [loading, setLoading] = useState(false);
+  const [profile, setProfile] = useState<any>(null);
+  const [fetchingProfile, setFetchingProfile] = useState(false);
   const [mintedBatch, setMintedBatch] = useState<any>(null);
   const [mintedItems, setMintedItems] = useState<any[]>([]);
   const qrCodesRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isConnected && address) {
+      setFetchingProfile(true);
+      getProfile(address).then(res => {
+        if (res.success && res.profile) {
+          setProfile(res.profile);
+        }
+        setFetchingProfile(false);
+      });
+    } else {
+      setProfile(null);
+    }
+  }, [isConnected, address]);
+
+  const handleCreateProfile = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!isConnected || !address) return;
+    
+    setLoading(true);
+    const formData = new FormData(e.currentTarget);
+    const brandName = formData.get("brandName") as string;
+    const factoryAddress = formData.get("factoryAddress") as string;
+    
+    try {
+      const res = await createProfile({
+        walletAddress: address,
+        brandName,
+        factoryAddress
+      });
+      if (res.success) {
+        setProfile(res.profile);
+        toast.success("Profile created successfully!");
+      } else {
+        toast.error(res.error || "Failed to create profile");
+      }
+    } catch (err: any) {
+      toast.error(err.message || "An error occurred");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleCreateBatch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -62,7 +107,9 @@ export default function ManufacturerDashboard() {
       const result = await createBatch({
         batchNumber,
         medicineName: formData.get("medicineName") as string,
-        manufacturer: "PharmaCorp Global",
+        manufacturer: profile.factoryAddress,
+        brandName: profile.brandName,
+        factoryAddress: profile.factoryAddress,
         composition: formData.get("composition") as string,
         quantity: parseInt(formData.get("quantity") as string),
         manufacturingDate: new Date(formData.get("manufacturingDate") as string),
@@ -128,9 +175,44 @@ export default function ManufacturerDashboard() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-6 glass-card rounded-xl p-8 border border-outline-variant/30 h-fit">
-            <h3 className="font-headline-md text-headline-md text-on-surface mb-6 border-b border-outline-variant/20 pb-4">Register New Batch</h3>
-            
-            <form onSubmit={handleCreateBatch} className="space-y-6">
+            {!isConnected ? (
+              <div className="text-center py-10">
+                <span className="material-symbols-outlined text-4xl text-on-surface-variant mb-2">wallet</span>
+                <p className="text-on-surface-variant font-body-md">Connect your wallet to access the Manufacturer Portal</p>
+              </div>
+            ) : fetchingProfile ? (
+              <div className="text-center py-10 flex flex-col items-center gap-4">
+                <span className="animate-spin material-symbols-outlined text-4xl text-primary">refresh</span>
+                <p className="text-on-surface-variant font-body-md">Loading Profile...</p>
+              </div>
+            ) : !profile ? (
+              <>
+                <h3 className="font-headline-md text-headline-md text-on-surface mb-6 border-b border-outline-variant/20 pb-4">Complete Your Profile</h3>
+                <form onSubmit={handleCreateProfile} className="space-y-6">
+                  <div className="space-y-2">
+                    <label className="font-label-caps text-label-caps text-on-surface-variant">BRAND NAME</label>
+                    <input name="brandName" required placeholder="e.g. New +" className="w-full bg-surface-container-lowest border border-outline-variant/50 text-on-surface rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary text-body-sm font-body-sm shadow-sm" />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="font-label-caps text-label-caps text-on-surface-variant">NAME AND ADDRESS OF THE MANUFACTURER</label>
+                    <input name="factoryAddress" required placeholder="e.g. PharmaCorp Global, 123 Industrial Ave" className="w-full bg-surface-container-lowest border border-outline-variant/50 text-on-surface rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary text-body-sm font-body-sm shadow-sm" />
+                  </div>
+                  <button type="submit" disabled={loading} className="w-full mt-8 bg-primary text-on-primary font-label-caps text-label-caps py-4 rounded-lg flex items-center justify-center gap-2 shadow-md">
+                    {loading ? <><span className="animate-spin material-symbols-outlined">refresh</span>Saving Profile...</> : <><span className="material-symbols-outlined">save</span>Save Profile</>}
+                  </button>
+                </form>
+              </>
+            ) : (
+              <>
+                <h3 className="font-headline-md text-headline-md text-on-surface mb-6 border-b border-outline-variant/20 pb-4 flex items-center justify-between">
+                  <span>Register New Batch</span>
+                  <div className="flex items-center gap-2 bg-surface-container text-xs px-2 py-1 rounded">
+                     <span className="material-symbols-outlined text-[14px]">domain</span>
+                     <span className="font-semibold">{profile.brandName}</span>
+                  </div>
+                </h3>
+                
+                <form onSubmit={handleCreateBatch} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="font-label-caps text-label-caps text-on-surface-variant">BATCH NUMBER</label>
@@ -167,6 +249,8 @@ export default function ManufacturerDashboard() {
                 {loading ? <><span className="animate-spin material-symbols-outlined">refresh</span>Minting to Blockchain...</> : <><span className="material-symbols-outlined">add_circle</span>Create & Mint Batch</>}
               </button>
             </form>
+            </>
+            )}
           </div>
 
           {mintedItems.length > 0 && (

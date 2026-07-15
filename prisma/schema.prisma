@@ -15,11 +15,21 @@ model User {
   createdAt DateTime @default(now())
 }
 
+model ManufacturerProfile {
+  id             String   @id @default(cuid())
+  walletAddress  String   @unique
+  brandName      String
+  factoryAddress String
+  createdAt      DateTime @default(now())
+}
+
 model Batch {
   id              String   @id @default(cuid())
   batchNumber     String   @unique
   medicineName    String
   manufacturer    String
+  brandName       String?  // Adding as optional for backward compatibility
+  factoryAddress  String?
   composition     String
   quantity        Int
   manufacturingDate DateTime
