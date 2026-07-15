@@ -51,11 +51,10 @@ export default async function ItemPassport({ params }: { params: Promise<{ id: s
             <div className="flex flex-col md:flex-row md:items-start gap-1 md:gap-4 pb-4 border-b border-gray-100">
               <div className="flex items-center gap-3 md:w-1/3 shrink-0">
                 <span className="material-symbols-outlined text-gray-400">qr_code_2</span>
-                <span className="text-sm font-medium text-gray-600">Unique Product Identification Code (GTIN No.) :</span>
+                <span className="text-sm font-medium text-gray-600">Unique Product Identifier (Unit ID) :</span>
               </div>
-              <div className="text-sm font-bold text-gray-900">
-                {/* Mocking a GTIN using the unique item ID for the demo */}
-                {item.id.replace(/\D/g, '').padEnd(14, '0').substring(0, 14)}
+              <div className="text-sm font-bold text-gray-900 tracking-wider">
+                {item.id.slice(-8).toUpperCase()}
               </div>
             </div>
 
