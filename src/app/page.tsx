@@ -193,15 +193,15 @@ export default function Home() {
           <div className="flex animate-marquee whitespace-nowrap opacity-60 hover:opacity-100 transition-opacity duration-300" style={{ animationDuration: '180s' }}>
             {[...Array(2)].map((_, i) => (
               <div key={i} className="flex items-center gap-16 mx-8">
-                <img src="https://logo.clearbit.com/pfizer.com" alt="Pfizer" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
-                <img src="https://logo.clearbit.com/novartis.com" alt="Novartis" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
-                <img src="https://logo.clearbit.com/roche.com" alt="Roche" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
-                <img src="https://logo.clearbit.com/gsk.com" alt="GSK" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
-                <img src="https://logo.clearbit.com/sanofi.com" alt="Sanofi" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
-                <img src="https://logo.clearbit.com/abbott.com" alt="Abbott" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
-                <img src="https://logo.clearbit.com/jnj.com" alt="Johnson & Johnson" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
-                <img src="https://logo.clearbit.com/astrazeneca.com" alt="AstraZeneca" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
-                <img src="https://logo.clearbit.com/bayer.com" alt="Bayer" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
+                <img src="/logos/pfizer.png" alt="Pfizer" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
+                <img src="/logos/novartis.png" alt="Novartis" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
+                <img src="/logos/roche.png" alt="Roche" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
+                <img src="/logos/gsk.png" alt="GSK" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
+                <img src="/logos/sanofi.png" alt="Sanofi" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
+                <img src="/logos/abbott.png" alt="Abbott" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
+                <img src="/logos/jnj.png" alt="Johnson & Johnson" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
+                <img src="/logos/astrazeneca.png" alt="AstraZeneca" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
+                <img src="/logos/bayer.png" alt="Bayer" className="h-12 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 rounded" />
               </div>
             ))}
           </div>
