@@ -188,7 +188,7 @@ export default function ManufacturerDashboard() {
                 <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar">
                   <div ref={qrCodesRef} style={{ backgroundColor: '#ffffff', color: '#000000', padding: '16px' }} className="grid grid-cols-2 md:grid-cols-3 gap-6 rounded-lg">
                     {mintedItems.map((item, index) => {
-                      const origin = typeof window !== 'undefined' ? window.location.origin : 'https://medichain-network.com';
+                      const origin = typeof window !== 'undefined' ? window.location.origin : 'https://medichain-sepia.vercel.app';
                       const verificationUrl = `${origin}/item/${item.id}`;
                       return (
                         <div key={item.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '16px', border: '1px solid #e5e7eb', borderRadius: '8px', textAlign: 'center', gap: '8px', pageBreakInside: 'avoid' }}>
