@@ -11,6 +11,7 @@ import * as THREE from "three";
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { address, balance, connect: connectWallet } = useWalletStore();
+  const isConnected = !!address;
   const animContainer = useRef<HTMLDivElement>(null);
 
   // Background WebGL animation for the sidebar
@@ -192,6 +193,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <button className="text-on-surface-variant hover:bg-surface-container-high/50 transition-colors p-2 rounded-full hidden md:block">
             <span className="material-symbols-outlined">notifications</span>
           </button>
+          
+          {isConnected && (
+            <Link href="/profile" className="text-on-surface-variant hover:text-primary hover:bg-surface-container-high/50 transition-colors p-2 rounded-full hidden md:block" title="My Profile">
+              <span className="material-symbols-outlined">account_circle</span>
+            </Link>
+          )}
+
           <button className="text-on-surface-variant hover:bg-surface-container-high/50 transition-colors p-2 rounded-full md:hidden">
             <span className="material-symbols-outlined">search</span>
           </button>

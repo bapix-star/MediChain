@@ -29,7 +29,7 @@ vi.mock('@/actions/profile', () => ({
       factoryAddress: '123 Test Factory',
     }
   }),
-  createProfile: vi.fn(),
+  updateProfile: vi.fn(),
 }));
 
 describe('Manufacturer Dashboard', () => {

@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { useWalletStore } from "@/store/useWalletStore";
 import { toast } from "sonner";
 import { createBatch } from "@/actions/batch";
-import { getProfile, createProfile } from "@/actions/profile";
+import { getProfile, updateProfile } from "@/actions/profile";
 import { AppShell } from "@/components/layout/AppShell";
 import { Horizon, TransactionBuilder, Networks, Operation } from "@stellar/stellar-sdk";
 import QRCode from "react-qr-code";
@@ -46,14 +46,14 @@ export default function ManufacturerDashboard() {
     const factoryAddress = formData.get("factoryAddress") as string;
     
     try {
-      const res = await createProfile({
+      const res = await updateProfile({
         walletAddress: address,
         brandName,
         factoryAddress
       });
       if (res.success) {
         setProfile(res.profile);
-        toast.success("Profile created successfully!");
+        toast.success("Profile saved successfully!");
       } else {
         toast.error(res.error || "Failed to create profile");
       }

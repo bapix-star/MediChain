@@ -14,14 +14,21 @@ export async function getProfile(walletAddress: string) {
   }
 }
 
-export async function createProfile(data: {
+export async function updateProfile(data: {
   walletAddress: string;
   brandName: string;
   factoryAddress: string;
 }) {
   try {
-    const profile = await prisma.manufacturerProfile.create({
-      data: {
+    const profile = await prisma.manufacturerProfile.upsert({
+      where: {
+        walletAddress: data.walletAddress,
+      },
+      update: {
+        brandName: data.brandName,
+        factoryAddress: data.factoryAddress,
+      },
+      create: {
         walletAddress: data.walletAddress,
         brandName: data.brandName,
         factoryAddress: data.factoryAddress,
