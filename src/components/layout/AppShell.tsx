@@ -121,7 +121,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const navLinks = [
     { name: "Home", href: "/", icon: "dashboard" },
     { name: "Registry", href: "/manufacturer", icon: "inventory_2" },
-    { name: "Shipments", href: "/logistics", icon: "local_shipping" },
+    { name: "Pharmacy", href: "/logistics", icon: "local_pharmacy" },
     { name: "Explorer", href: "/explorer", icon: "database", fill: true },
   ];
 
@@ -132,7 +132,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <div className="flex flex-col gap-y-4 h-full">
           <div className="mb-8">
             <Logo className="mb-2" />
-            <p className="font-body-sm text-body-sm text-on-surface-variant ml-[52px]">Enterprise Logistics</p>
+            <p className="font-body-sm text-body-sm text-on-surface-variant ml-[52px]">Pharmacy POS</p>
           </div>
           
           <div className="flex flex-col gap-2 flex-grow">

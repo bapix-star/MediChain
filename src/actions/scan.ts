@@ -33,8 +33,15 @@ export async function processScan(data: {
       return { success: false, isCounterfeit: true, error: "Item not found" };
     }
 
+    const itemDetails = {
+      medicineName: item.batch.medicineName,
+      manufacturer: item.batch.manufacturer,
+      expiryDate: item.batch.expiryDate,
+      batchNumber: item.batch.batchNumber
+    };
+
     if (item.isRecalled) {
-      return { success: false, isCounterfeit: true, error: "Item is recalled" };
+      return { success: false, isCounterfeit: true, error: "Item is recalled", itemDetails };
     }
 
     if (item.isSold) {
@@ -46,7 +53,8 @@ export async function processScan(data: {
       return { 
         success: false, 
         isCounterfeit: true, 
-        error: `ALREADY DISPENSED! Potential Counterfeit or Reuse Detected. This item was marked as sold at ${soldLocation} on ${soldDate}.` 
+        error: `ALREADY DISPENSED! Potential Counterfeit or Reuse Detected. This item was marked as sold at ${soldLocation} on ${soldDate}.`,
+        itemDetails
       };
     }
 
@@ -92,12 +100,7 @@ export async function processScan(data: {
       success: true, 
       isCounterfeit, 
       scanEvent, 
-      itemDetails: {
-        medicineName: item.batch.medicineName,
-        manufacturer: item.batch.manufacturer,
-        expiryDate: item.batch.expiryDate,
-        batchNumber: item.batch.batchNumber
-      },
+      itemDetails,
       txHash: "mock_tx_" + Math.random().toString(36).substring(2, 15)
     };
   } catch (error) {

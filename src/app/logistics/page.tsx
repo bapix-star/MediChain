@@ -97,14 +97,7 @@ export default function LogisticsDashboard() {
         toast.error("COUNTERFEIT ANOMALY DETECTED!", { duration: 5000 });
       } else {
         toast.success(
-          <div className="flex flex-col gap-1">
-            <span className="font-semibold">Scan verified successfully. Custody updated.</span>
-            {result.txHash && (
-              <a href={`https://stellar.expert/explorer/testnet/tx/${result.txHash}`} target="_blank" rel="noreferrer" className="text-primary underline text-sm flex items-center gap-1 hover:text-primary-container transition-colors">
-                View on Stellar Expert <span className="material-symbols-outlined text-[14px]">open_in_new</span>
-              </a>
-            )}
-          </div>,
+          "Scan verified successfully. Custody updated.",
           { duration: 6000 }
         );
       }
@@ -218,7 +211,7 @@ export default function LogisticsDashboard() {
                   {scanResult.isCounterfeit ? (
                     <><span className="material-symbols-outlined text-[28px]" style={{ fontVariationSettings: "'FILL' 1" }}>gpp_bad</span> Potential Counterfeit Detected</>
                   ) : (
-                    <><span className="material-symbols-outlined text-[28px]" style={{ fontVariationSettings: "'FILL' 1" }}>gpp_good</span> Genuine Product Verified</>
+                    <><span className="material-symbols-outlined text-[28px]" style={{ fontVariationSettings: "'FILL' 1" }}>gpp_good</span> Product Dispensed & Verified</>
                   )}
                 </h3>
                 
@@ -239,6 +232,20 @@ export default function LogisticsDashboard() {
                         <span className="font-label-caps text-label-caps text-on-surface-variant block mb-1">BATCH</span>
                         <span className="font-data-mono text-data-mono text-on-surface bg-surface px-2 py-1 rounded inline-block">{scanResult.itemDetails.batchNumber}</span>
                       </div>
+                      {!scanResult.isCounterfeit && scanResult.txHash && (
+                        <>
+                          <hr className="border-outline-variant/20" />
+                          <div className="mt-4 p-4 bg-primary/5 rounded-lg border border-primary/20">
+                            <span className="font-label-caps text-label-caps text-on-surface-variant block mb-2 flex items-center gap-2">
+                              <span className="material-symbols-outlined text-[16px] text-primary">verified</span>
+                              STELLAR NETWORK VERIFICATION
+                            </span>
+                            <a href={`https://stellar.expert/explorer/testnet/tx/${scanResult.txHash}`} target="_blank" rel="noreferrer" className="text-primary font-medium hover:underline flex items-center gap-1 transition-all">
+                              View Transaction on Explorer <span className="material-symbols-outlined text-[16px]">open_in_new</span>
+                            </a>
+                          </div>
+                        </>
+                      )}
                     </div>
                   )}
                   {scanResult.isCounterfeit && (

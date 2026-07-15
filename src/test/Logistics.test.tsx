@@ -25,7 +25,7 @@ describe('Logistics Dashboard', () => {
   it('renders the logistics dashboard heading', () => {
     render(<LogisticsDashboard />);
     expect(screen.getByText(/PHARMACY DISPENSE/i)).toBeInTheDocument();
-    expect(screen.getByText(/Pharmacy POS/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Pharmacy POS/i).length).toBeGreaterThan(0);
   });
 
   it('renders the scan item form', () => {

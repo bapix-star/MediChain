@@ -49,8 +49,9 @@ describe('App Integration Flow', () => {
     
     // 3. Final State: Connected Dashboard
     await waitFor(() => {
-      expect(screen.getByText(/LOGISTICS & SCANNING/i)).toBeInTheDocument();
+      expect(screen.getByText(/PHARMACY DISPENSE/i)).toBeInTheDocument();
       expect(screen.getByText(/ITEM ID \(FROM QR\)/i)).toBeInTheDocument();
+      expect(screen.getByText(/SCANNER LOCATION/i)).toBeInTheDocument();
     });
   });
 });
