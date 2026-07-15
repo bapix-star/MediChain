@@ -130,23 +130,23 @@ export default function LogisticsDashboard() {
           <div className="md:col-span-6">
             <div className="glass-card rounded-xl p-8 border border-outline-variant/30 delay-100 fade-in-up relative overflow-hidden h-full">
               <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/5 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-outline-variant/20 pb-4 mb-6 gap-4">
-                <h3 className="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+              <div className="border-b border-outline-variant/20 pb-4 mb-6">
+                <h3 className="font-headline-md text-headline-md text-on-surface flex items-center gap-2 mb-4">
                   <span className="material-symbols-outlined text-primary">qr_code_scanner</span>
                   Scan Item QR
                 </h3>
-                <div className="flex flex-wrap gap-2">
-                  <button onClick={() => setShowScanner(!showScanner)} type="button" className={`text-xs font-label-caps text-label-caps px-3 py-1.5 rounded-full transition-colors flex items-center gap-1 ${showScanner ? 'bg-error/10 text-error hover:bg-error/20' : 'bg-primary/10 text-primary hover:bg-primary/20'}`}>
-                    <span className="material-symbols-outlined text-[14px]">videocam</span>
-                    {showScanner ? "Close Camera" : "Webcam"}
+                <div className="grid grid-cols-3 gap-2">
+                  <button onClick={() => setShowScanner(!showScanner)} type="button" className={`w-full justify-center text-xs font-label-caps text-label-caps px-2 py-2 rounded-lg transition-colors flex flex-col items-center gap-1 ${showScanner ? 'bg-error/10 text-error hover:bg-error/20' : 'bg-primary/10 text-primary hover:bg-primary/20'}`}>
+                    <span className="material-symbols-outlined text-[18px]">videocam</span>
+                    {showScanner ? "Close" : "Webcam"}
                   </button>
-                  <button onClick={() => fileInputRef.current?.click()} type="button" className="text-xs font-label-caps text-label-caps bg-primary/10 text-primary hover:bg-primary/20 px-3 py-1.5 rounded-full transition-colors flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[14px]">upload_file</span>
+                  <button onClick={() => fileInputRef.current?.click()} type="button" className="w-full justify-center text-xs font-label-caps text-label-caps bg-primary/10 text-primary hover:bg-primary/20 px-2 py-2 rounded-lg transition-colors flex flex-col items-center gap-1">
+                    <span className="material-symbols-outlined text-[18px]">upload_file</span>
                     Upload
                   </button>
                   <input type="file" accept="image/*" className="hidden" ref={fileInputRef} onChange={handleImageUpload} />
-                  <button onClick={handleDemoFill} type="button" className="text-xs font-label-caps text-label-caps bg-secondary/10 text-secondary hover:bg-secondary/20 px-3 py-1.5 rounded-full transition-colors flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[14px]">auto_fix</span>
+                  <button onClick={handleDemoFill} type="button" className="w-full justify-center text-xs font-label-caps text-label-caps bg-secondary/10 text-secondary hover:bg-secondary/20 px-2 py-2 rounded-lg transition-colors flex flex-col items-center gap-1">
+                    <span className="material-symbols-outlined text-[18px]">auto_fix</span>
                     Test Mode
                   </button>
                 </div>
