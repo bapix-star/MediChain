@@ -149,6 +149,10 @@ export default {
 			bgShimmer: {
 				'0%': { backgroundPosition: '-200% 0' },
 				'100%': { backgroundPosition: '200% 0' },
+			},
+			marquee: {
+				'0%': { transform: 'translateX(0%)' },
+				'100%': { transform: 'translateX(-100%)' },
 			}
 		},
 		animation: {
@@ -156,7 +160,8 @@ export default {
 			'scan': 'scan 2s ease-in-out infinite',
 			'subtle-pulse': 'subtlePulse 2.5s infinite',
 			'glow-pulse': 'glowPulse 2s infinite ease-in-out',
-			'bg-shimmer': 'bgShimmer 1.5s infinite linear'
+			'bg-shimmer': 'bgShimmer 1.5s infinite linear',
+			'marquee': 'marquee 25s linear infinite'
 		}
   	}
   },

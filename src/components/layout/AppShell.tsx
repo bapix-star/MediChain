@@ -158,14 +158,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </div>
           
           <div className="mt-auto flex flex-col gap-2 border-t border-outline-variant/20 pt-4">
-            <Link href="#" className="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all">
+            <button onClick={(e) => { e.preventDefault(); import("sonner").then(m => m.toast.info("Settings coming soon")); }} className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all">
               <span className="material-symbols-outlined">settings</span>
               <span className="font-label-caps text-label-caps">Settings</span>
-            </Link>
-            <Link href="#" className="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all mb-4">
+            </button>
+            <button onClick={(e) => { e.preventDefault(); import("sonner").then(m => m.toast.info("Support portal coming soon")); }} className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all mb-4">
               <span className="material-symbols-outlined">help</span>
               <span className="font-label-caps text-label-caps">Support</span>
-            </Link>
+            </button>
           </div>
         </div>
       </nav>

@@ -185,8 +185,31 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Pharma Partners Marquee */}
+        <section className="py-12 border-y border-outline-variant/20 bg-surface-container-lowest overflow-hidden flex relative z-10">
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-surface-container-lowest to-transparent z-20 pointer-events-none"></div>
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-surface-container-lowest to-transparent z-20 pointer-events-none"></div>
+          
+          <div className="flex animate-marquee whitespace-nowrap opacity-60 hover:opacity-100 transition-opacity duration-300">
+            {[...Array(2)].map((_, i) => (
+              <div key={i} className="flex items-center gap-16 mx-8">
+                <span className="font-display-lg text-2xl font-bold tracking-tight text-on-surface-variant">Sun Pharma</span>
+                <span className="font-display-lg text-2xl font-black italic tracking-tighter text-on-surface-variant">Cipla</span>
+                <span className="font-display-lg text-2xl font-bold tracking-tight text-on-surface-variant">Dr.Reddy's</span>
+                <span className="font-headline-lg text-2xl font-semibold tracking-wide text-on-surface-variant">LUPIN</span>
+                <span className="font-display-lg text-2xl font-bold tracking-tight text-on-surface-variant">PFIZER</span>
+                <span className="font-headline-lg text-2xl font-bold text-on-surface-variant">NOVARTIS</span>
+                <span className="font-display-lg text-2xl font-black text-on-surface-variant">Roche</span>
+                <span className="font-headline-lg text-2xl font-semibold tracking-tight text-on-surface-variant">gsk</span>
+                <span className="font-display-lg text-2xl font-bold tracking-tight text-on-surface-variant">sanofi</span>
+                <span className="font-headline-lg text-2xl font-black text-on-surface-variant">Abbott</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* Features Section */}
-        <section id="features" className="py-32 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto relative overflow-hidden">
+        <section id="features" className="pt-16 pb-32 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto relative overflow-hidden">
           {/* Background Ambient Glows */}
           <div className="absolute top-1/2 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] -translate-y-1/2 pointer-events-none"></div>
           <div className="absolute top-1/2 right-0 w-96 h-96 bg-secondary/10 rounded-full blur-[100px] -translate-y-1/2 pointer-events-none"></div>

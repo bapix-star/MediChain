@@ -70,30 +70,30 @@ export default async function ExplorerDashboard() {
                 <span className="material-symbols-outlined">description</span>
               </div>
               <div>
-                <h3 className="font-headline-md text-headline-md text-on-surface text-lg">Core Contract</h3>
-                <span className="font-label-caps text-label-caps text-primary bg-primary/10 px-2 py-0.5 rounded">Verified</span>
+                <h3 className="font-headline-md text-headline-md text-on-surface text-lg">Stellar Network</h3>
+                <span className="font-label-caps text-label-caps text-primary bg-primary/10 px-2 py-0.5 rounded">Connected</span>
               </div>
             </div>
             <div className="space-y-4 flex-1">
               <div>
-                <span className="font-label-caps text-label-caps text-on-surface-variant block mb-1">Address</span>
+                <span className="font-label-caps text-label-caps text-on-surface-variant block mb-1">Horizon Node</span>
                 <div className="flex items-center justify-between bg-surface-container-lowest border border-outline-variant/30 px-3 py-2 rounded-lg">
-                  <span className="font-data-mono text-data-mono text-on-surface text-xs truncate mr-2">0x89aF...3bE2</span>
+                  <span className="font-data-mono text-data-mono text-on-surface text-xs truncate mr-2">horizon-testnet.stellar.org</span>
                   <button className="text-on-surface-variant hover:text-primary"><span className="material-symbols-outlined text-[16px]">content_copy</span></button>
                 </div>
               </div>
               <div>
-                <span className="font-label-caps text-label-caps text-on-surface-variant block mb-1">Compiler Version</span>
-                <span className="font-data-mono text-data-mono text-on-surface">v0.8.20+commit.a1b79de6</span>
+                <span className="font-label-caps text-label-caps text-on-surface-variant block mb-1">Asset Protocol</span>
+                <span className="font-data-mono text-data-mono text-on-surface">ManageData (MediChain_Batch)</span>
               </div>
               <div>
-                <span className="font-label-caps text-label-caps text-on-surface-variant block mb-1">Optimization</span>
-                <span className="font-data-mono text-data-mono text-on-surface">Enabled (200 runs)</span>
+                <span className="font-label-caps text-label-caps text-on-surface-variant block mb-1">Ledger Status</span>
+                <span className="font-data-mono text-data-mono text-on-surface text-primary">Synced & Healthy</span>
               </div>
             </div>
-            <button className="w-full mt-6 bg-surface-container-low text-primary border border-outline-variant/30 py-2 rounded-lg font-label-caps text-label-caps hover:bg-surface-container-high transition-colors">
-              View ABI / Source
-            </button>
+            <a href="https://stellar.expert/explorer/testnet" target="_blank" rel="noopener noreferrer" className="w-full mt-6 flex justify-center items-center gap-2 bg-surface-container-low text-primary border border-outline-variant/30 py-2 rounded-lg font-label-caps text-label-caps hover:bg-surface-container-high transition-colors">
+              View on Stellar Expert <span className="material-symbols-outlined text-[16px]">open_in_new</span>
+            </a>
           </div>
 
           {/* Recent Transactions */}
