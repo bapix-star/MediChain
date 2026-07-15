@@ -2,6 +2,16 @@
 
 import { prisma } from "@/lib/prisma";
 
+export async function getRandomItem() {
+  try {
+    const item = await prisma.item.findFirst();
+    if (!item) return { success: false };
+    return { success: true, itemId: item.id };
+  } catch (error) {
+    return { success: false };
+  }
+}
+
 export async function processScan(data: {
   itemId: string;
   location: string;
