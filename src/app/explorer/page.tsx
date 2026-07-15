@@ -2,6 +2,8 @@ import Link from "next/link";
 import { AppShell } from "@/components/layout/AppShell";
 import { prisma } from "@/lib/prisma";
 
+export const dynamic = 'force-dynamic';
+
 export default async function ExplorerDashboard() {
   const batches = await prisma.batch.findMany({
     orderBy: { createdAt: "desc" },

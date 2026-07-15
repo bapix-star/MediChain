@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import BatchDetailClient from "./BatchDetailClient";
 import { AppShell } from "@/components/layout/AppShell";
 
+export const dynamic = 'force-dynamic';
+
 export default async function BatchDetailPage({
   params,
 }: {
