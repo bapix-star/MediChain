@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  address   String   @unique
+  role      String   // "MANUFACTURER", "LOGISTICS"
+  name      String
+  createdAt DateTime @default(now())
+}
+
+model Batch {
+  id              String   @id @default(cuid())
+  batchNumber     String   @unique
+  medicineName    String
+  manufacturer    String
+  composition     String
+  quantity        Int
+  manufacturingDate DateTime
+  expiryDate      DateTime
+  merkleRoot      String
+  blockchainHash  String?
+  status          String   @default("Manufacturing") // "Manufacturing", "In Transit", "Delivered"
+  ownerAddress    String
+  createdAt       DateTime @default(now())
+  
+  items           Item[]
+}
+
+model Item {
+  id              String   @id @default(cuid())
+  batchId         String
+  batch           Batch    @relation(fields: [batchId], references: [id])
+  merkleProof     String
+  isRecalled      Boolean  @default(false)
+  scans           ScanEvent[]
+}
+
+model ScanEvent {
+  id              String   @id @default(cuid())
+  itemId          String
+  item            Item     @relation(fields: [itemId], references: [id])
+  location        String
+  timestamp       DateTime @default(now())
+  isFlagged       Boolean  @default(false)
+  flagReason      String?
+}
