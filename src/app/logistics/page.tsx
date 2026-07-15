@@ -6,6 +6,8 @@ import { toast } from "sonner";
 import { processScan, getRandomItem } from "@/actions/scan";
 import { AppShell } from "@/components/layout/AppShell";
 import { Scanner } from "@yudiel/react-qr-scanner";
+import jsQR from "jsqr";
+import { useRef } from "react";
 
 export default function LogisticsDashboard() {
   const { address, isConnected, connect: connectWallet } = useWalletStore();
@@ -14,8 +16,8 @@ export default function LogisticsDashboard() {
 
   const [itemId, setItemId] = useState("");
   const [location, setLocation] = useState("");
-  const [actionType, setActionType] = useState<"TRANSIT" | "SALE">("TRANSIT");
   const [showScanner, setShowScanner] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleWebcamScan = (detectedCodes: any) => {
     if (detectedCodes && detectedCodes.length > 0) {
@@ -25,13 +27,44 @@ export default function LogisticsDashboard() {
     }
   };
 
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+        if (!context) return;
+        
+        canvas.width = img.width;
+        canvas.height = img.height;
+        context.drawImage(img, 0, 0, img.width, img.height);
+        
+        const imageData = context.getImageData(0, 0, img.width, img.height);
+        const code = jsQR(imageData.data, imageData.width, imageData.height);
+        
+        if (code) {
+          setItemId(code.data);
+          toast.success("QR Code extracted successfully!");
+        } else {
+          toast.error("Could not find a valid QR code in the image.");
+        }
+      };
+      img.src = event.target?.result as string;
+    };
+    reader.readAsDataURL(file);
+  };
+
   const handleDemoFill = async () => {
     toast.info("Fetching a test item from the database...");
     const res = await getRandomItem();
     if (res.success && res.itemId) {
       setItemId(res.itemId);
-      setLocation("Port of Los Angeles, Checkpoint 4");
-      toast.success("Test data loaded! Click Scan & Verify.");
+      setLocation("Walgreens Pharmacy, Main St.");
+      toast.success("Test data loaded! Click Scan & Dispense.");
     } else {
       toast.error("No items found. Please mint a batch first.");
     }
@@ -52,7 +85,7 @@ export default function LogisticsDashboard() {
     const result = await processScan({
       itemId: parsedId,
       location: location,
-      actionType: actionType,
+      actionType: "SALE",
     });
     
     setLoading(false);
@@ -85,11 +118,11 @@ export default function LogisticsDashboard() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
           <div>
             <div className="inline-flex items-center gap-2 bg-secondary/10 text-secondary font-label-caps text-label-caps px-3 py-1 rounded-full w-fit mb-3">
-              <span className="material-symbols-outlined text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>local_shipping</span>
-              LOGISTICS & SCANNING
+              <span className="material-symbols-outlined text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>local_pharmacy</span>
+              PHARMACY DISPENSE
             </div>
-            <h2 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">Transit Verification</h2>
-            <p className="font-body-md text-body-md text-on-surface-variant">Update custody and log environmental data at critical checkpoints.</p>
+            <h2 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">Pharmacy POS</h2>
+            <p className="font-body-md text-body-md text-on-surface-variant">Scan medicine QR code to officially dispense it to the patient and check for counterfeits.</p>
           </div>
         </div>
 
@@ -97,16 +130,21 @@ export default function LogisticsDashboard() {
           <div className="md:col-span-6">
             <div className="glass-card rounded-xl p-8 border border-outline-variant/30 delay-100 fade-in-up relative overflow-hidden h-full">
               <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/5 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
-              <div className="flex items-center justify-between border-b border-outline-variant/20 pb-4 mb-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-outline-variant/20 pb-4 mb-6 gap-4">
                 <h3 className="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
                   <span className="material-symbols-outlined text-primary">qr_code_scanner</span>
-                  {actionType === "TRANSIT" ? "Scan Item QR" : "Pharmacy POS Scan"}
+                  Scan Item QR
                 </h3>
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                   <button onClick={() => setShowScanner(!showScanner)} type="button" className={`text-xs font-label-caps text-label-caps px-3 py-1.5 rounded-full transition-colors flex items-center gap-1 ${showScanner ? 'bg-error/10 text-error hover:bg-error/20' : 'bg-primary/10 text-primary hover:bg-primary/20'}`}>
                     <span className="material-symbols-outlined text-[14px]">videocam</span>
-                    {showScanner ? "Close Camera" : "Use Webcam"}
+                    {showScanner ? "Close Camera" : "Webcam"}
                   </button>
+                  <button onClick={() => fileInputRef.current?.click()} type="button" className="text-xs font-label-caps text-label-caps bg-primary/10 text-primary hover:bg-primary/20 px-3 py-1.5 rounded-full transition-colors flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[14px]">upload_file</span>
+                    Upload
+                  </button>
+                  <input type="file" accept="image/*" className="hidden" ref={fileInputRef} onChange={handleImageUpload} />
                   <button onClick={handleDemoFill} type="button" className="text-xs font-label-caps text-label-caps bg-secondary/10 text-secondary hover:bg-secondary/20 px-3 py-1.5 rounded-full transition-colors flex items-center gap-1">
                     <span className="material-symbols-outlined text-[14px]">auto_fix</span>
                     Test Mode
@@ -114,20 +152,7 @@ export default function LogisticsDashboard() {
                 </div>
               </div>
               
-              <div className="mb-6 bg-surface-container-low p-1 rounded-lg flex w-full">
-                <button 
-                  onClick={() => setActionType("TRANSIT")} 
-                  className={`flex-1 py-2 rounded-md font-label-caps text-xs transition-colors ${actionType === "TRANSIT" ? 'bg-surface shadow-sm text-primary' : 'text-on-surface-variant hover:text-on-surface'}`}
-                >
-                  TRANSIT CHECKPOINT
-                </button>
-                <button 
-                  onClick={() => setActionType("SALE")} 
-                  className={`flex-1 py-2 rounded-md font-label-caps text-xs transition-colors ${actionType === "SALE" ? 'bg-surface shadow-sm text-secondary' : 'text-on-surface-variant hover:text-on-surface'}`}
-                >
-                  PHARMACY DISPENSE
-                </button>
-              </div>
+              {/* Toggle section removed as per user request */}
 
               {showScanner && (
                 <div className="mb-6 rounded-lg overflow-hidden border border-outline-variant/30 aspect-square max-w-[300px] mx-auto relative">
@@ -177,8 +202,8 @@ export default function LogisticsDashboard() {
                     </>
                   ) : (
                     <>
-                      <span className="material-symbols-outlined">satellite_alt</span>
-                      Scan & Verify
+                      <span className="material-symbols-outlined">point_of_sale</span>
+                      Scan & Dispense
                     </>
                   )}
                 </button>

@@ -24,12 +24,14 @@ vi.mock('@/actions/scan', () => ({
 describe('Logistics Dashboard', () => {
   it('renders the logistics dashboard heading', () => {
     render(<LogisticsDashboard />);
-    expect(screen.getByText(/LOGISTICS & SCANNING/i)).toBeInTheDocument();
+    expect(screen.getByText(/PHARMACY DISPENSE/i)).toBeInTheDocument();
+    expect(screen.getByText(/Pharmacy POS/i)).toBeInTheDocument();
   });
 
   it('renders the scan item form', () => {
     render(<LogisticsDashboard />);
-    expect(screen.getByText(/ITEM ID \(FROM QR\)/i)).toBeInTheDocument();
-    expect(screen.getByText(/SCANNER LOCATION/i)).toBeInTheDocument();
+    expect(screen.getByText(/Scan Item QR/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/e.g. Paste QR URL or ID/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/e.g. Warehouse A, New York/i)).toBeInTheDocument();
   });
 });
