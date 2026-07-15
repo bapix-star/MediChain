@@ -116,7 +116,7 @@ export default function Home() {
         <div className="flex items-center gap-6">
           <nav className="hidden md:flex gap-6 items-center">
             <Link href="/manufacturer" className="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors px-2 py-1 flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">inventory_2</span> REGISTRY</Link>
-            <Link href="/logistics" className="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors px-2 py-1 flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">local_shipping</span> LOGISTICS</Link>
+            <Link href="/logistics" className="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors px-2 py-1 flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">local_pharmacy</span> PHARMACY POS</Link>
             <Link href="/explorer" className="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors px-2 py-1 flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">database</span> EXPLORER</Link>
           </nav>
           <div className="h-6 w-px bg-outline-variant/30 hidden md:block mx-2"></div>
@@ -163,8 +163,8 @@ export default function Home() {
                       Manufacturer Portal
                     </Link>
                     <Link href="/logistics" className="border border-outline-variant text-on-surface font-label-caps text-label-caps px-6 py-3 rounded-lg flex items-center gap-2 hover:bg-surface-container-low transition-colors bg-white/50 backdrop-blur-sm">
-                      <span className="material-symbols-outlined">local_shipping</span>
-                      Logistics Portal
+                      <span className="material-symbols-outlined">local_pharmacy</span>
+                      Pharmacy POS
                     </Link>
                   </div>
                 </div>
@@ -237,15 +237,17 @@ export default function Home() {
                 
                 <div>
                   <div className="w-14 h-14 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_15px_rgba(12,99,231,0.2)]">
-                    <span className="material-symbols-outlined text-3xl text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>share_location</span>
+                    <span className="material-symbols-outlined text-3xl text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>inventory_2</span>
                   </div>
-                  <h3 className="font-headline-md text-2xl text-on-surface mb-4 font-bold tracking-tight">Global Real-Time Tracking</h3>
-                  <p className="font-body-md text-on-surface-variant max-w-xl leading-relaxed text-lg">GPS and IoT sensor integration writes location and environmental data directly to the ledger, ensuring immutable transit records across the globe.</p>
+                  <h3 className="font-headline-md text-2xl text-on-surface mb-4 font-bold tracking-tight">Stellar Blockchain Registry</h3>
+                  <p className="font-body-md text-on-surface-variant max-w-xl leading-relaxed text-lg">Immutable minting of pharmaceutical batches directly to the Stellar network using smart contracts, ensuring absolute origin authenticity.</p>
                 </div>
                 
                 <div className="mt-8 flex items-center gap-2 text-primary font-label-lg font-semibold opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-                  <span>Explore Satellite Integration</span>
-                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                  <Link href="/manufacturer" className="flex items-center gap-2">
+                    <span>View Registry Network</span>
+                    <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                  </Link>
                 </div>
               </div>
             </motion.div>
@@ -262,10 +264,10 @@ export default function Home() {
               <div className="h-full bg-surface-container-lowest rounded-[15px] p-8 md:p-10 relative overflow-hidden flex flex-col justify-between">
                 <div>
                   <div className="w-14 h-14 rounded-xl bg-secondary/10 border border-secondary/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_15px_rgba(20,184,166,0.2)]">
-                    <span className="material-symbols-outlined text-3xl text-secondary" style={{ fontVariationSettings: "'FILL' 1" }}>policy</span>
+                    <span className="material-symbols-outlined text-3xl text-secondary" style={{ fontVariationSettings: "'FILL' 1" }}>local_pharmacy</span>
                   </div>
-                  <h3 className="font-headline-md text-2xl text-on-surface mb-4 font-bold tracking-tight">Automated Compliance</h3>
-                  <p className="font-body-md text-on-surface-variant leading-relaxed text-lg">Smart contracts rigorously enforce DSCSA and GDPR regulatory requirements at every supply chain node.</p>
+                  <h3 className="font-headline-md text-2xl text-on-surface mb-4 font-bold tracking-tight">Pharmacy POS & Dispensing</h3>
+                  <p className="font-body-md text-on-surface-variant leading-relaxed text-lg">Integrated barcode scanning at the point of sale to instantly detect already-dispensed medication and prevent counterfeits.</p>
                 </div>
               </div>
             </motion.div>
@@ -282,10 +284,10 @@ export default function Home() {
               <div className="h-full bg-surface-container-lowest rounded-[15px] p-8 md:p-10 relative overflow-hidden flex flex-col justify-between">
                 <div>
                   <div className="w-14 h-14 rounded-xl bg-error/10 border border-error/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_15px_rgba(239,68,68,0.2)]">
-                    <span className="material-symbols-outlined text-3xl text-error" style={{ fontVariationSettings: "'FILL' 1" }}>gpp_bad</span>
+                    <span className="material-symbols-outlined text-3xl text-error" style={{ fontVariationSettings: "'FILL' 1" }}>qr_code_scanner</span>
                   </div>
-                  <h3 className="font-headline-md text-2xl text-on-surface mb-4 font-bold tracking-tight">Anti-Counterfeit</h3>
-                  <p className="font-body-md text-on-surface-variant leading-relaxed text-lg">Cryptographic batch signatures prevent unauthorized medication from entering the authorized supply chain.</p>
+                  <h3 className="font-headline-md text-2xl text-on-surface mb-4 font-bold tracking-tight">Public Verification Portal</h3>
+                  <p className="font-body-md text-on-surface-variant leading-relaxed text-lg">Consumers can scan QR codes to instantly view the complete, transparent journey of their medication from factory to pharmacy.</p>
                 </div>
               </div>
             </motion.div>
@@ -302,19 +304,19 @@ export default function Home() {
               <div className="h-full bg-surface-container-lowest rounded-[15px] p-8 md:p-10 relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
                 <div className="flex-1">
                   <div className="w-14 h-14 rounded-xl bg-tertiary/10 border border-tertiary/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_15px_rgba(139,92,246,0.2)]">
-                    <span className="material-symbols-outlined text-3xl text-tertiary" style={{ fontVariationSettings: "'FILL' 1" }}>fingerprint</span>
+                    <span className="material-symbols-outlined text-3xl text-tertiary" style={{ fontVariationSettings: "'FILL' 1" }}>gpp_bad</span>
                   </div>
-                  <h3 className="font-headline-md text-2xl text-on-surface mb-4 font-bold tracking-tight">Zero-Knowledge Proofs</h3>
-                  <p className="font-body-md text-on-surface-variant max-w-xl leading-relaxed text-lg">Verify batch authenticity mathematically without exposing proprietary supplier data to third-party logistics providers.</p>
+                  <h3 className="font-headline-md text-2xl text-on-surface mb-4 font-bold tracking-tight">Counterfeit Anomaly Detection</h3>
+                  <p className="font-body-md text-on-surface-variant max-w-xl leading-relaxed text-lg">Real-time cryptographic validation that flags duplicate scans, unauthorized supply chain entries, and impossible transit times.</p>
                 </div>
                 
                 <div className="hidden md:flex flex-col items-center justify-center p-6 bg-surface-container rounded-xl border border-outline-variant/30 shadow-inner min-w-[200px]">
                   <div className="relative">
-                    <span className="material-symbols-outlined text-tertiary text-4xl mb-2 relative z-10">lock</span>
+                    <span className="material-symbols-outlined text-tertiary text-4xl mb-2 relative z-10">verified</span>
                     <div className="absolute inset-0 bg-tertiary blur-xl opacity-40 mix-blend-screen group-hover:opacity-80 transition-opacity duration-500"></div>
                   </div>
-                  <span className="font-data-mono text-sm font-bold text-on-surface tracking-wider">zkSNARK</span>
-                  <span className="font-label-sm text-tertiary uppercase tracking-widest mt-1">Validated</span>
+                  <span className="font-data-mono text-sm font-bold text-on-surface tracking-wider">STELLAR</span>
+                  <span className="font-label-sm text-tertiary uppercase tracking-widest mt-1">Verified</span>
                 </div>
               </div>
             </motion.div>
