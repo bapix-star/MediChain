@@ -5,6 +5,7 @@ import { useWalletStore } from "@/store/useWalletStore";
 import { toast } from "sonner";
 import { processScan, getRandomItem } from "@/actions/scan";
 import { AppShell } from "@/components/layout/AppShell";
+import { Scanner } from "@yudiel/react-qr-scanner";
 
 export default function LogisticsDashboard() {
   const { address, isConnected, connect: connectWallet } = useWalletStore();
@@ -13,6 +14,16 @@ export default function LogisticsDashboard() {
 
   const [itemId, setItemId] = useState("");
   const [location, setLocation] = useState("");
+  const [actionType, setActionType] = useState<"TRANSIT" | "SALE">("TRANSIT");
+  const [showScanner, setShowScanner] = useState(false);
+
+  const handleWebcamScan = (detectedCodes: any) => {
+    if (detectedCodes && detectedCodes.length > 0) {
+      setItemId(detectedCodes[0].rawValue);
+      setShowScanner(false);
+      toast.success("QR Code scanned! You can now verify.");
+    }
+  };
 
   const handleDemoFill = async () => {
     toast.info("Fetching a test item from the database...");
@@ -41,6 +52,7 @@ export default function LogisticsDashboard() {
     const result = await processScan({
       itemId: parsedId,
       location: location,
+      actionType: actionType,
     });
     
     setLoading(false);
@@ -88,14 +100,44 @@ export default function LogisticsDashboard() {
               <div className="flex items-center justify-between border-b border-outline-variant/20 pb-4 mb-6">
                 <h3 className="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
                   <span className="material-symbols-outlined text-primary">qr_code_scanner</span>
-                  Scan Item QR
+                  {actionType === "TRANSIT" ? "Scan Item QR" : "Pharmacy POS Scan"}
                 </h3>
-                <button onClick={handleDemoFill} type="button" className="text-xs font-label-caps text-label-caps bg-secondary/10 text-secondary hover:bg-secondary/20 px-3 py-1.5 rounded-full transition-colors flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[14px]">auto_fix</span>
-                  Test Mode
-                </button>
+                <div className="flex gap-2">
+                  <button onClick={() => setShowScanner(!showScanner)} type="button" className={`text-xs font-label-caps text-label-caps px-3 py-1.5 rounded-full transition-colors flex items-center gap-1 ${showScanner ? 'bg-error/10 text-error hover:bg-error/20' : 'bg-primary/10 text-primary hover:bg-primary/20'}`}>
+                    <span className="material-symbols-outlined text-[14px]">videocam</span>
+                    {showScanner ? "Close Camera" : "Use Webcam"}
+                  </button>
+                  <button onClick={handleDemoFill} type="button" className="text-xs font-label-caps text-label-caps bg-secondary/10 text-secondary hover:bg-secondary/20 px-3 py-1.5 rounded-full transition-colors flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[14px]">auto_fix</span>
+                    Test Mode
+                  </button>
+                </div>
               </div>
               
+              <div className="mb-6 bg-surface-container-low p-1 rounded-lg flex w-full">
+                <button 
+                  onClick={() => setActionType("TRANSIT")} 
+                  className={`flex-1 py-2 rounded-md font-label-caps text-xs transition-colors ${actionType === "TRANSIT" ? 'bg-surface shadow-sm text-primary' : 'text-on-surface-variant hover:text-on-surface'}`}
+                >
+                  TRANSIT CHECKPOINT
+                </button>
+                <button 
+                  onClick={() => setActionType("SALE")} 
+                  className={`flex-1 py-2 rounded-md font-label-caps text-xs transition-colors ${actionType === "SALE" ? 'bg-surface shadow-sm text-secondary' : 'text-on-surface-variant hover:text-on-surface'}`}
+                >
+                  PHARMACY DISPENSE
+                </button>
+              </div>
+
+              {showScanner && (
+                <div className="mb-6 rounded-lg overflow-hidden border border-outline-variant/30 aspect-square max-w-[300px] mx-auto relative">
+                  <Scanner onScan={handleWebcamScan} onError={(error) => console.error(error)} />
+                  <div className="absolute inset-0 border-[40px] border-black/40 pointer-events-none"></div>
+                  <div className="absolute inset-0 border-2 border-primary m-10 pointer-events-none rounded-lg"></div>
+                  <p className="absolute bottom-2 inset-x-0 text-center text-white text-xs font-bold drop-shadow-md z-10">Hold QR code up to camera</p>
+                </div>
+              )}
+
               <form onSubmit={handleScan} className="space-y-6">
                 <div className="space-y-2">
                   <label className="font-label-caps text-label-caps text-on-surface-variant">ITEM ID (FROM QR)</label>
@@ -179,7 +221,7 @@ export default function LogisticsDashboard() {
                       <span className="material-symbols-outlined mt-0.5">warning</span>
                       <div>
                         <div className="font-label-caps mb-1">ANOMALY REASON</div>
-                        <div className="font-body-sm">{scanResult.scanEvent?.flagReason || "Flagged by anomaly detection algorithm."}</div>
+                        <div className="font-body-sm">{scanResult.error || scanResult.scanEvent?.flagReason || "Flagged by anomaly detection algorithm."}</div>
                       </div>
                     </div>
                   )}

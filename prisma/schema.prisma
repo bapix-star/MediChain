@@ -49,6 +49,7 @@ model Item {
   batch           Batch    @relation(fields: [batchId], references: [id])
   merkleProof     String
   isRecalled      Boolean  @default(false)
+  isSold          Boolean  @default(false)
   scans           ScanEvent[]
 }
 
@@ -60,4 +61,5 @@ model ScanEvent {
   timestamp       DateTime @default(now())
   isFlagged       Boolean  @default(false)
   flagReason      String?
+  eventType       String   @default("TRANSIT") // "TRANSIT" or "SALE"
 }

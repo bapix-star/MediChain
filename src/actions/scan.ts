@@ -15,6 +15,7 @@ export async function getRandomItem() {
 export async function processScan(data: {
   itemId: string;
   location: string;
+  actionType?: "TRANSIT" | "SALE";
 }) {
   try {
     const item = await prisma.item.findUnique({
@@ -36,6 +37,19 @@ export async function processScan(data: {
       return { success: false, isCounterfeit: true, error: "Item is recalled" };
     }
 
+    if (item.isSold) {
+      // Find where it was sold
+      const saleEvent = item.scans.find(s => s.eventType === "SALE");
+      const soldLocation = saleEvent ? saleEvent.location : "a registered pharmacy";
+      const soldDate = saleEvent ? saleEvent.timestamp.toLocaleDateString() : "an earlier date";
+      
+      return { 
+        success: false, 
+        isCounterfeit: true, 
+        error: `ALREADY DISPENSED! Potential Counterfeit or Reuse Detected. This item was marked as sold at ${soldLocation} on ${soldDate}.` 
+      };
+    }
+
     // Counterfeit Anomaly Detection Logic
     let isFlagged = false;
     let flagReason = null;
@@ -53,12 +67,24 @@ export async function processScan(data: {
       }
     }
 
+    // Process the scan
+    const eventType = data.actionType || "TRANSIT";
+    
+    // If it's a SALE, update the item
+    if (eventType === "SALE" && !isCounterfeit) {
+      await prisma.item.update({
+        where: { id: data.itemId },
+        data: { isSold: true }
+      });
+    }
+
     const scanEvent = await prisma.scanEvent.create({
       data: {
         itemId: data.itemId,
         location: data.location,
         isFlagged,
         flagReason,
+        eventType,
       },
     });
 
