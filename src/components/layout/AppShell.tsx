@@ -1,0 +1,261 @@
+"use client";
+
+import React, { useEffect, useRef } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useWalletStore } from "@/store/useWalletStore";
+import { WalletConnect } from "@/components/WalletConnect";
+import { Logo } from "@/components/Logo";
+import * as THREE from "three";
+
+export function AppShell({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const { address, balance, connect: connectWallet } = useWalletStore();
+  const animContainer = useRef<HTMLDivElement>(null);
+
+  // Background WebGL animation for the sidebar
+  useEffect(() => {
+    if (!animContainer.current) return;
+    const container = animContainer.current;
+    
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    container.appendChild(renderer.domElement);
+
+    const group = new THREE.Group();
+    
+    // Molecule nodes (Atoms)
+    const sphereGeo = new THREE.SphereGeometry(0.3, 32, 32);
+    const atomMat = new THREE.MeshPhongMaterial({ 
+      color: 0x0c63e7, 
+      emissive: 0x0c63e7,
+      emissiveIntensity: 0.5,
+      transparent: true, 
+      opacity: 0.9 
+    });
+
+    const positions = [
+      new THREE.Vector3(-1.5, -0.5, 0),
+      new THREE.Vector3(-0.5, 0.8, 0.5),
+      new THREE.Vector3(0.5, -0.2, -0.5),
+      new THREE.Vector3(1.5, 0.6, 0.2),
+    ];
+
+    const atoms: THREE.Mesh[] = [];
+    positions.forEach(pos => {
+      const atom = new THREE.Mesh(sphereGeo, atomMat);
+      atom.position.copy(pos);
+      group.add(atom);
+      atoms.push(atom);
+    });
+
+    // Connections (Bonds)
+    const bondMat = new THREE.MeshPhongMaterial({ color: 0x82b1ff, transparent: true, opacity: 0.6 });
+    for (let i = 0; i < positions.length - 1; i++) {
+      const start = positions[i];
+      const end = positions[i + 1];
+      const distance = start.distanceTo(end);
+      
+      const cylinderGeo = new THREE.CylinderGeometry(0.05, 0.05, distance, 8);
+      const bond = new THREE.Mesh(cylinderGeo, bondMat);
+      
+      // Position bond halfway between atoms
+      bond.position.copy(start).lerp(end, 0.5);
+      // Orient bond to point from start to end
+      bond.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), end.clone().sub(start).normalize());
+      
+      group.add(bond);
+    }
+    
+    scene.add(group);
+
+    const light = new THREE.DirectionalLight(0xffffff, 2);
+    light.position.set(2, 2, 3);
+    scene.add(light);
+    scene.add(new THREE.AmbientLight(0x404040, 2));
+
+    camera.position.z = 4.5;
+
+    let frameId: number;
+    function animate() {
+        frameId = requestAnimationFrame(animate);
+        // Slowly rotate the entire molecule
+        group.rotation.y += 0.005;
+        group.rotation.x = Math.sin(Date.now() * 0.001) * 0.1;
+        group.position.y = Math.sin(Date.now() * 0.002) * 0.15;
+        
+        // Pulse atoms
+        atoms.forEach((atom, i) => {
+          const scale = 1 + Math.sin(Date.now() * 0.003 + i) * 0.1;
+          atom.scale.set(scale, scale, scale);
+        });
+        
+        renderer.render(scene, camera);
+    }
+
+    const handleResize = () => {
+        if (!container) return;
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+    };
+
+    window.addEventListener('resize', handleResize);
+    animate();
+
+    return () => {
+        window.removeEventListener('resize', handleResize);
+        cancelAnimationFrame(frameId);
+        renderer.dispose();
+        if (container.contains(renderer.domElement)) {
+            container.removeChild(renderer.domElement);
+        }
+    };
+  }, []);
+
+  const navLinks = [
+    { name: "Dashboard", href: "/", icon: "dashboard" },
+    { name: "Registry", href: "/manufacturer", icon: "inventory_2" },
+    { name: "Shipments", href: "/logistics", icon: "local_shipping" },
+    { name: "Explorer", href: "/explorer", icon: "database", fill: true },
+  ];
+
+  return (
+    <div className="flex-1 md:ml-[280px] flex flex-col min-h-screen">
+      {/* SideNavBar (Desktop) */}
+      <nav className="fixed left-0 top-0 h-screen w-sidebar-width hidden md:flex flex-col border-r border-outline-variant/20 bg-surface z-40 p-6 shadow-sm">
+        <div className="flex flex-col gap-y-4 h-full">
+          <div className="mb-8">
+            <Logo className="mb-2" />
+            <p className="font-body-sm text-body-sm text-on-surface-variant ml-[52px]">Enterprise Logistics</p>
+          </div>
+          
+          <div className="flex flex-col gap-2 flex-grow">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
+                    isActive 
+                      ? "bg-primary-fixed text-on-primary-fixed font-semibold" 
+                      : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low"
+                  }`}
+                >
+                  <span className="material-symbols-outlined" style={{ fontVariationSettings: link.fill && isActive ? "'FILL' 1" : "'FILL' 0" }}>{link.icon}</span>
+                  <span className="font-label-caps text-label-caps">{link.name}</span>
+                </Link>
+              );
+            })}
+            
+            <div className="w-full flex-1 min-h-[120px] mt-4 opacity-80 pointer-events-none" ref={animContainer}></div>
+          </div>
+          
+          <div className="mt-auto flex flex-col gap-2 border-t border-outline-variant/20 pt-4">
+            <Link href="#" className="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all">
+              <span className="material-symbols-outlined">settings</span>
+              <span className="font-label-caps text-label-caps">Settings</span>
+            </Link>
+            <Link href="#" className="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all mb-4">
+              <span className="material-symbols-outlined">help</span>
+              <span className="font-label-caps text-label-caps">Support</span>
+            </Link>
+          </div>
+        </div>
+      </nav>
+
+      {/* TopAppBar */}
+      <header className="bg-surface/80 backdrop-blur-xl docked full-width top-0 sticky z-50 border-b border-outline-variant/30 shadow-sm flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 h-16">
+        <div className="flex items-center gap-2 md:hidden">
+          <Logo />
+        </div>
+
+        {/* Global Search Desktop */}
+        <div className="hidden md:flex flex-1 max-w-2xl mx-auto">
+          <div className="relative w-full group">
+            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant z-10">search</span>
+            <input 
+              type="text" 
+              className="w-full bg-surface-container-lowest border border-outline-variant/50 text-on-surface rounded-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-shadow text-body-sm font-body-sm shadow-sm hover:shadow-md" 
+              placeholder="Search TxHash, Block, ProductID..." 
+            />
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-outline text-xs font-data-mono bg-surface-container px-2 py-0.5 rounded border border-outline-variant/30">/</span>
+          </div>
+        </div>
+
+          <div className="flex items-center gap-4 flex-1 justify-end">
+          <button className="text-on-surface-variant hover:bg-surface-container-high/50 transition-colors p-2 rounded-full hidden md:block">
+            <span className="material-symbols-outlined">notifications</span>
+          </button>
+          <button className="text-on-surface-variant hover:bg-surface-container-high/50 transition-colors p-2 rounded-full md:hidden">
+            <span className="material-symbols-outlined">search</span>
+          </button>
+          
+          <WalletConnect />
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="flex-1 w-full bg-surface-container-lowest pb-24 md:pb-0">
+        {!address && pathname !== '/explorer' ? (
+          <div className="h-full min-h-[60vh] flex flex-col items-center justify-center p-8 text-center animate-in fade-in duration-500">
+            <div className="w-24 h-24 bg-primary-container rounded-full flex items-center justify-center mb-6 shadow-sm">
+              <span className="material-symbols-outlined text-primary text-5xl">lock</span>
+            </div>
+            <h2 className="text-headline-md font-headline-md font-bold text-on-surface mb-4">Wallet Required</h2>
+            <p className="text-body-lg font-body-lg text-on-surface-variant max-w-md mb-8">
+              Please connect your Web3 wallet to securely access the MediChain platform and manage pharmaceutical operations.
+            </p>
+            <button 
+              onClick={connectWallet}
+              className="bg-primary text-on-primary hover:bg-primary/90 px-8 py-3 rounded-full font-label-lg font-semibold flex items-center gap-2 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
+            >
+              <span className="material-symbols-outlined">account_balance_wallet</span>
+              Connect Wallet
+            </button>
+          </div>
+        ) : (
+          children
+        )}
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-surface-container-lowest border-t border-outline-variant/10 w-full py-8 px-margin-desktop flex flex-col md:flex-row justify-between items-center text-on-surface-variant mt-auto">
+        <p className="font-body-sm text-body-sm mb-4 md:mb-0">© 2024 MediChain Platform. On-Chain Verified.</p>
+        <div className="flex gap-6 font-body-sm text-body-sm">
+          <Link href="#" className="hover:text-primary transition-colors">Privacy Policy</Link>
+          <Link href="#" className="hover:text-primary transition-colors">Terms of Service</Link>
+          <Link href="#" className="hover:text-primary transition-colors">Network Status</Link>
+        </div>
+      </footer>
+
+      {/* BottomNavBar (Mobile) */}
+      <nav className="fixed bottom-0 w-full z-50 rounded-t-xl md:hidden border-t border-outline-variant/50 shadow-lg bg-surface/90 backdrop-blur-md flex justify-around items-center h-16 px-4 pb-safe">
+        {navLinks.map((link) => {
+          const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
+          return (
+            <Link 
+              key={link.name}
+              href={link.href} 
+              className={`flex flex-col items-center p-2 rounded-lg relative ${
+                isActive 
+                  ? "text-primary after:content-[''] after:w-1 after:h-1 after:bg-primary after:rounded-full after:mt-1" 
+                  : "text-on-surface-variant opacity-60 hover:opacity-100"
+              }`}
+            >
+              <span className="material-symbols-outlined" style={{ fontVariationSettings: link.fill && isActive ? "'FILL' 1" : "'FILL' 0" }}>
+                {link.icon}
+              </span>
+              <span className={`font-label-caps text-[10px] mt-1 ${isActive ? "font-bold" : ""}`}>{link.name}</span>
+            </Link>
+          );
+        })}
+      </nav>
+    </div>
+  );
+}
