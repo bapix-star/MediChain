@@ -9,7 +9,7 @@
 [![Soroban](https://img.shields.io/badge/Smart_Contracts-Soroban-orange)](https://soroban.stellar.org/)
 
   <h3>🚀 Live Production Deployment: <a href="https://medichain-sepia.vercel.app/">https://medichain-sepia.vercel.app/</a></h3>
-  <h3>🎥 Video Walkthrough: <a href="#">[Insert YouTube Link Here]</a></h3>
+  <h3>🎥 Video Walkthrough: <a href="https://youtu.be/0I2q8S8AMls">https://youtu.be/0I2q8S8AMls</a></h3>
 
 ![Hero Dashboard](./demo-img/hero-showingconnected-balance-wallet.png)
 
