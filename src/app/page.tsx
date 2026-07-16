@@ -217,11 +217,16 @@ export default function Home() {
         </section>
 
         {/* Pharma Partners Marquee */}
-        <section className="py-12 border-y border-outline-variant/20 bg-surface-container-lowest overflow-hidden flex relative z-10">
-          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-surface-container-lowest to-transparent z-20 pointer-events-none"></div>
-          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-surface-container-lowest to-transparent z-20 pointer-events-none"></div>
+        <section className="py-12 border-y border-outline-variant/20 bg-surface-container-lowest overflow-hidden relative z-10 flex flex-col">
+          <div className="text-center mb-10 px-4 z-30">
+            <p className="font-label-caps text-sm text-on-surface-variant font-semibold tracking-[0.2em] uppercase">Trusted by 100+ Global Pharmaceutical Leaders & Manufacturers</p>
+          </div>
           
-          <div className="flex animate-marquee whitespace-nowrap opacity-100 transition-opacity duration-300" style={{ animationDuration: '20s' }}>
+          <div className="w-full flex relative">
+            <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-surface-container-lowest to-transparent z-20 pointer-events-none"></div>
+            <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-surface-container-lowest to-transparent z-20 pointer-events-none"></div>
+            
+            <div className="flex animate-marquee whitespace-nowrap opacity-100 transition-opacity duration-300" style={{ animationDuration: '20s' }}>
             {[...Array(2)].map((_, i) => (
               <div key={i} className="flex items-center gap-16 mx-8 shrink-0">
                 <img src="/logos/Acadia_rgb_primary_gradient.png" alt="Acadia" className="h-12 w-auto object-contain shrink-0 rounded" />
@@ -235,6 +240,7 @@ export default function Home() {
                 <img src="/logos/Orion_pharma_logo_(2025-).svg" alt="Orion" className="h-12 w-auto object-contain shrink-0 rounded" />
               </div>
             ))}
+            </div>
           </div>
         </section>
 
@@ -245,10 +251,6 @@ export default function Home() {
           <div className="absolute top-1/2 right-0 w-96 h-96 bg-secondary/10 rounded-full blur-[100px] -translate-y-1/2 pointer-events-none"></div>
 
           <div className="mb-20 text-center animate-fade-in-up relative z-10">
-            <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 text-primary font-label-caps text-label-caps px-4 py-1.5 rounded-full mb-6">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-              ENTERPRISE-GRADE
-            </div>
             <h2 className="font-headline-lg text-4xl md:text-5xl text-on-surface mb-6 font-bold tracking-tight">Immutable Security Architecture</h2>
             <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto leading-relaxed">Built on a decentralized framework to eliminate single points of failure in critical medical supply chains, ensuring 100% data integrity.</p>
           </div>
