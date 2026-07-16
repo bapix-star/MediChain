@@ -137,7 +137,7 @@ sequenceDiagram
 - **Database**: Next.js Server Actions + Prisma + PostgreSQL
 ---
 
-## ⚙️ Techy Overview: How it works under the hood
+## ⚙️ Overview: How it works under the hood
 
 To achieve a seamless, Web2-like user experience while maintaining Web3 immutability, MediChain leverages a hybrid architecture:
 
