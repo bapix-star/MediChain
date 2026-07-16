@@ -213,15 +213,19 @@ export default function Home() {
                 </div>
               </div>
             </div>
+
+            {/* Animated Slogan below hero */}
+            <div className="mt-20 mb-8 text-center animate-fade-in-up" style={{ animationDelay: '300ms' }}>
+              <p className="font-label-caps text-sm md:text-base font-bold tracking-[0.3em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary bg-[length:200%_auto] animate-gradient-text drop-shadow-sm">
+                Trusted by 100+ Global Pharmaceutical Leaders & Manufacturers
+              </p>
+            </div>
+            
           </div>
         </section>
 
         {/* Pharma Partners Marquee */}
-        <section className="py-12 border-y border-outline-variant/20 bg-surface-container-lowest overflow-hidden relative z-10 flex flex-col">
-          <div className="text-center mb-10 px-4 z-30">
-            <p className="font-label-caps text-sm text-on-surface-variant font-semibold tracking-[0.2em] uppercase">Trusted by 100+ Global Pharmaceutical Leaders & Manufacturers</p>
-          </div>
-          
+        <section className="py-12 border-y border-outline-variant/20 bg-surface-container-lowest overflow-hidden flex relative z-10">
           <div className="w-full flex relative">
             <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-surface-container-lowest to-transparent z-20 pointer-events-none"></div>
             <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-surface-container-lowest to-transparent z-20 pointer-events-none"></div>

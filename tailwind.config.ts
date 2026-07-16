@@ -153,6 +153,10 @@ export default {
 			marquee: {
 				'0%': { transform: 'translateX(0%)' },
 				'100%': { transform: 'translateX(-50%)' },
+			},
+			gradientText: {
+				'0%, 100%': { backgroundPosition: '0% 50%' },
+				'50%': { backgroundPosition: '100% 50%' },
 			}
 		},
 		animation: {
@@ -161,7 +165,8 @@ export default {
 			'subtle-pulse': 'subtlePulse 2.5s infinite',
 			'glow-pulse': 'glowPulse 2s infinite ease-in-out',
 			'bg-shimmer': 'bgShimmer 1.5s infinite linear',
-			'marquee': 'marquee 120s linear infinite'
+			'marquee': 'marquee 120s linear infinite',
+			'gradient-text': 'gradientText 4s ease infinite'
 		}
   	}
   },
