@@ -35,13 +35,14 @@ describe('Home Page', () => {
   it('renders the call to action buttons', () => {
     render(<Home />);
     expect(screen.getByText(/Manufacturer Portal/i)).toBeInTheDocument();
-    expect(screen.getByText(/Logistics Portal/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Pharmacy POS/i)[0]).toBeInTheDocument();
   });
 
   it('renders feature cards', () => {
     render(<Home />);
-    expect(screen.getByText('Global Real-Time Tracking')).toBeInTheDocument();
-    expect(screen.getByText('Automated Compliance')).toBeInTheDocument();
-    expect(screen.getByText('Anti-Counterfeit')).toBeInTheDocument();
+    expect(screen.getByText('Stellar Blockchain Registry')).toBeInTheDocument();
+    expect(screen.getByText('Pharmacy POS & Dispensing')).toBeInTheDocument();
+    expect(screen.getByText('Public Verification Portal')).toBeInTheDocument();
+    expect(screen.getByText('Counterfeit Anomaly Detection')).toBeInTheDocument();
   });
 });
