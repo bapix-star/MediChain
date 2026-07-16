@@ -229,7 +229,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="md:col-span-8 group relative rounded-2xl p-[1px] overflow-hidden bg-gradient-to-br from-outline-variant/50 to-transparent hover:from-primary/50 hover:to-secondary/50 transition-colors duration-500"
+              className="md:col-span-6 group relative rounded-2xl p-[1px] overflow-hidden bg-gradient-to-br from-outline-variant/50 to-transparent hover:from-primary/50 hover:to-secondary/50 transition-colors duration-500"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="h-full bg-surface-container-lowest rounded-[15px] p-8 md:p-10 relative overflow-hidden flex flex-col justify-between">
@@ -258,7 +258,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="md:col-span-4 group relative rounded-2xl p-[1px] overflow-hidden bg-gradient-to-br from-outline-variant/50 to-transparent hover:from-secondary/50 hover:to-transparent transition-colors duration-500"
+              className="md:col-span-6 group relative rounded-2xl p-[1px] overflow-hidden bg-gradient-to-br from-outline-variant/50 to-transparent hover:from-secondary/50 hover:to-transparent transition-colors duration-500"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="h-full bg-surface-container-lowest rounded-[15px] p-8 md:p-10 relative overflow-hidden flex flex-col justify-between">
@@ -278,7 +278,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="md:col-span-4 group relative rounded-2xl p-[1px] overflow-hidden bg-gradient-to-br from-outline-variant/50 to-transparent hover:from-error/50 hover:to-transparent transition-colors duration-500"
+              className="md:col-span-6 group relative rounded-2xl p-[1px] overflow-hidden bg-gradient-to-br from-outline-variant/50 to-transparent hover:from-error/50 hover:to-transparent transition-colors duration-500"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-error/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="h-full bg-surface-container-lowest rounded-[15px] p-8 md:p-10 relative overflow-hidden flex flex-col justify-between">
@@ -298,7 +298,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="md:col-span-8 group relative rounded-2xl p-[1px] overflow-hidden bg-gradient-to-br from-outline-variant/50 to-transparent hover:from-tertiary/50 hover:to-primary/50 transition-colors duration-500"
+              className="md:col-span-6 group relative rounded-2xl p-[1px] overflow-hidden bg-gradient-to-br from-outline-variant/50 to-transparent hover:from-tertiary/50 hover:to-primary/50 transition-colors duration-500"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-tertiary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="h-full bg-surface-container-lowest rounded-[15px] p-8 md:p-10 relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-8">

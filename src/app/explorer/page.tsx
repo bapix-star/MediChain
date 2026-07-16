@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { AppShell } from "@/components/layout/AppShell";
 import { prisma } from "@/lib/prisma";
+import { NetworkChart } from "@/components/explorer/NetworkChart";
 
 export const dynamic = 'force-dynamic';
 
@@ -56,11 +57,7 @@ export default async function ExplorerDashboard() {
             </div>
             
             {/* Simple visual chart representation */}
-            <div 
-              className="mt-8 h-32 w-full flex items-end gap-1 opacity-80 rounded-lg border border-outline-variant/30" 
-              style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuAirweCVyGK3kfwiFAoWDM5nR8c-4a2l8aATtGOWo2gZOc7qAQiwGe2YbOGXWO5bDhaUeKoHvwdz_rnf107WUEhqpZjS2DPpiG0kC87CHDm1OfmeRnB6Svgbgn8OuJMRqZrLiW0oyVY-EwvzZ1VnOP43MU5kmO3uVUKNo5jnBX12FU6qGlJl6JXxgJUM3-Hv0ETlrI88oa4tmSi3LjBOCM15t-9fmagZ2Crt_Y6d0eOK7fH762LaN_i')", backgroundSize: 'cover', backgroundPosition: 'center' }}
-            >
-            </div>
+            <NetworkChart />
           </div>
 
           {/* Smart Contract Info */}
