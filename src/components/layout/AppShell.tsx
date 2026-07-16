@@ -120,10 +120,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   }, []);
 
   const navLinks = [
-    { name: "Home", href: "/", icon: "dashboard" },
-    { name: "Registry", href: "/manufacturer", icon: "inventory_2" },
-    { name: "Pharmacy", href: "/logistics", icon: "local_pharmacy" },
-    { name: "Explorer", href: "/explorer", icon: "database", fill: true },
+    { name: "Home", href: "/", icon: "home" },
+    { name: "Registry", href: "/manufacturer", icon: "precision_manufacturing" },
+    { name: "Pharmacy", href: "/logistics", icon: "local_shipping" },
+    { name: "Explorer", href: "/explorer", icon: "manage_search", fill: true },
   ];
 
   return (
@@ -259,28 +259,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </div>
       </footer>
 
-      {/* BottomNavBar (Mobile) */}
-      <nav className="fixed bottom-0 w-full z-50 rounded-t-xl md:hidden border-t border-outline-variant/50 shadow-lg bg-surface/90 backdrop-blur-md flex justify-around items-center h-16 px-4 pb-safe">
-        {navLinks.map((link) => {
-          const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
-          return (
-            <Link 
-              key={link.name}
-              href={link.href} 
-              className={`flex flex-col items-center p-2 rounded-lg relative ${
-                isActive 
-                  ? "text-primary after:content-[''] after:w-1 after:h-1 after:bg-primary after:rounded-full after:mt-1" 
-                  : "text-on-surface-variant opacity-60 hover:opacity-100"
-              }`}
-            >
-              <span className="material-symbols-outlined" style={{ fontVariationSettings: link.fill && isActive ? "'FILL' 1" : "'FILL' 0" }}>
-                {link.icon}
-              </span>
-              <span className={`font-label-caps text-[10px] mt-1 ${isActive ? "font-bold" : ""}`}>{link.name}</span>
-            </Link>
-          );
-        })}
-      </nav>
     </div>
   );
 }
