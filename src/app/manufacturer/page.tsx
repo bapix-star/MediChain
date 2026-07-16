@@ -187,7 +187,7 @@ export default function ManufacturerDashboard() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          <div className="lg:col-span-6 glass-card rounded-xl p-8 border border-outline-variant/30 h-fit">
+          <div className="lg:col-span-6 glass-card rounded-xl p-4 md:p-8 border border-outline-variant/30 h-fit">
             {!isConnected ? (
               <div className="text-center py-10">
                 <span className="material-symbols-outlined text-4xl text-on-surface-variant mb-2">wallet</span>
@@ -268,7 +268,7 @@ export default function ManufacturerDashboard() {
 
           {mintedItems.length > 0 && (
             <div className="lg:col-span-6 animate-fade-in-up">
-              <div className="glass-card rounded-xl p-8 border border-outline-variant/30 flex flex-col h-full max-h-[800px]">
+              <div className="glass-card rounded-xl p-4 md:p-8 border border-outline-variant/30 flex flex-col h-full max-h-[800px]">
                 <div className="flex items-center justify-between border-b border-outline-variant/20 pb-4 mb-6">
                   <div>
                     <h3 className="font-headline-md text-headline-md text-on-surface text-secondary flex items-center gap-2">

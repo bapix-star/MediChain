@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useWalletStore } from "@/store/useWalletStore";
@@ -12,6 +12,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { address, balance, connect: connectWallet } = useWalletStore();
   const isConnected = !!address;
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const animContainer = useRef<HTMLDivElement>(null);
 
   // Background WebGL animation for the sidebar
@@ -127,8 +128,16 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex-1 md:ml-[280px] flex flex-col min-h-screen">
-      {/* SideNavBar (Desktop) */}
-      <nav className="fixed left-0 top-0 h-screen w-sidebar-width hidden md:flex flex-col border-r border-outline-variant/20 bg-surface z-40 p-6 shadow-sm">
+      {/* Mobile Overlay */}
+      {isSidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 md:hidden transition-opacity"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
+      {/* SideNavBar (Desktop & Mobile) */}
+      <nav className={`fixed left-0 top-0 h-screen w-sidebar-width flex flex-col border-r border-outline-variant/20 bg-surface z-50 p-6 shadow-sm transition-transform duration-300 md:translate-x-0 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="flex flex-col gap-y-4 h-full">
           <div className="mb-8">
             <Logo className="mb-2" />
@@ -142,6 +151,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 <Link
                   key={link.name}
                   href={link.href}
+                  onClick={() => setIsSidebarOpen(false)}
                   className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
                     isActive 
                       ? "bg-primary-fixed text-on-primary-fixed font-semibold" 
@@ -173,6 +183,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       {/* TopAppBar */}
       <header className="bg-surface/80 backdrop-blur-xl docked full-width top-0 sticky z-50 border-b border-outline-variant/30 shadow-sm flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 h-16">
         <div className="flex items-center gap-2 md:hidden">
+          <button 
+            onClick={() => setIsSidebarOpen(true)}
+            className="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors"
+          >
+            <span className="material-symbols-outlined">menu</span>
+          </button>
           <Logo />
         </div>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useWalletStore } from "@/store/useWalletStore";
 import { WalletConnect } from "@/components/WalletConnect";
@@ -13,6 +13,7 @@ export default function Home() {
   const canvasRef = useRef<HTMLDivElement>(null);
   const { address } = useWalletStore();
   const isConnected = !!address;
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -120,7 +121,7 @@ export default function Home() {
             <Link href="/explorer" className="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors px-2 py-1 flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">database</span> EXPLORER</Link>
           </nav>
           <div className="h-6 w-px bg-outline-variant/30 hidden md:block mx-2"></div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 md:gap-4">
             <button className="text-on-surface-variant hover:bg-surface-container-high/50 transition-colors p-2 rounded-full hidden md:block">
               <span className="material-symbols-outlined">notifications</span>
             </button>
@@ -130,8 +131,38 @@ export default function Home() {
               </Link>
             )}
             <WalletConnect />
+            <button 
+              className="md:hidden p-2 text-on-surface-variant rounded-full hover:bg-surface-container-low transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              <span className="material-symbols-outlined">{isMobileMenuOpen ? 'close' : 'menu'}</span>
+            </button>
           </div>
         </div>
+        
+        {/* Mobile Navigation Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 w-full bg-surface border-b border-outline-variant/30 shadow-lg py-4 px-margin-mobile flex flex-col gap-4 z-40 animate-fade-in-up">
+            <Link href="/manufacturer" className="flex items-center gap-3 p-3 rounded-lg hover:bg-surface-container-low" onClick={() => setIsMobileMenuOpen(false)}>
+              <span className="material-symbols-outlined text-primary">inventory_2</span>
+              <span className="font-label-caps text-label-caps text-on-surface">Registry</span>
+            </Link>
+            <Link href="/logistics" className="flex items-center gap-3 p-3 rounded-lg hover:bg-surface-container-low" onClick={() => setIsMobileMenuOpen(false)}>
+              <span className="material-symbols-outlined text-secondary">local_pharmacy</span>
+              <span className="font-label-caps text-label-caps text-on-surface">Pharmacy POS</span>
+            </Link>
+            <Link href="/explorer" className="flex items-center gap-3 p-3 rounded-lg hover:bg-surface-container-low" onClick={() => setIsMobileMenuOpen(false)}>
+              <span className="material-symbols-outlined text-primary">database</span>
+              <span className="font-label-caps text-label-caps text-on-surface">Explorer</span>
+            </Link>
+            {isConnected && (
+              <Link href="/profile" className="flex items-center gap-3 p-3 rounded-lg hover:bg-surface-container-low" onClick={() => setIsMobileMenuOpen(false)}>
+                <span className="material-symbols-outlined text-on-surface-variant">account_circle</span>
+                <span className="font-label-caps text-label-caps text-on-surface">My Profile</span>
+              </Link>
+            )}
+          </div>
+        )}
       </header>
 
       <main className="w-full relative">
@@ -141,7 +172,7 @@ export default function Home() {
         </div>
 
         {/* Hero Section */}
-        <section className="relative w-full min-h-[819px] flex items-center pt-16 md:pt-24 pb-16 px-margin-mobile md:px-margin-desktop overflow-hidden">
+        <section className="relative w-full pt-20 pb-16 md:pt-24 md:pb-20 px-margin-mobile md:px-margin-desktop overflow-hidden">
           
           <div className="relative z-10 w-full max-w-container-max mx-auto">
             <div className="glass-panel p-8 md:p-12 rounded-2xl shadow-xl w-full animate-fade-in-up">

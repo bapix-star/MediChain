@@ -124,7 +124,7 @@ export default function LogisticsDashboard() {
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           <div className="md:col-span-6">
-            <div className="glass-card rounded-xl p-8 border border-outline-variant/30 delay-100 fade-in-up relative overflow-hidden h-full">
+            <div className="glass-card rounded-xl p-4 md:p-8 border border-outline-variant/30 delay-100 fade-in-up relative overflow-hidden h-full">
               <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/5 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
               <div className="border-b border-outline-variant/20 pb-4 mb-6">
                 <h3 className="font-headline-md text-headline-md text-on-surface flex items-center gap-2 mb-4">
@@ -209,7 +209,7 @@ export default function LogisticsDashboard() {
 
           <div className="md:col-span-6">
             {scanResult ? (
-              <div className={`glass-card rounded-xl p-8 border ${scanResult.isCounterfeit ? 'border-error bg-error/5' : 'border-secondary bg-secondary/5'} delay-200 fade-in-up h-full flex flex-col`}>
+              <div className={`glass-card rounded-xl p-4 md:p-8 border ${scanResult.isCounterfeit ? 'border-error bg-error/5' : 'border-secondary bg-secondary/5'} delay-200 fade-in-up h-full flex flex-col`}>
                 <h3 className={`font-headline-md text-headline-md mb-6 border-b pb-4 flex items-center gap-2 ${scanResult.isCounterfeit ? 'text-error border-error/20' : 'text-secondary border-secondary/20'}`}>
                   {scanResult.isCounterfeit ? (
                     <><span className="material-symbols-outlined text-[28px]" style={{ fontVariationSettings: "'FILL' 1" }}>gpp_bad</span> Potential Counterfeit Detected</>
