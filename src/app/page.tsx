@@ -190,7 +190,7 @@ export default function Home() {
           <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-surface-container-lowest to-transparent z-20 pointer-events-none"></div>
           <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-surface-container-lowest to-transparent z-20 pointer-events-none"></div>
           
-          <div className="flex animate-marquee whitespace-nowrap opacity-100 transition-opacity duration-300" style={{ animationDuration: '40s' }}>
+          <div className="flex animate-marquee whitespace-nowrap opacity-100 transition-opacity duration-300" style={{ animationDuration: '20s' }}>
             {[...Array(2)].map((_, i) => (
               <div key={i} className="flex items-center gap-16 mx-8 shrink-0">
                 <img src="/logos/Acadia_rgb_primary_gradient.png" alt="Acadia" className="h-12 w-auto object-contain shrink-0 rounded" />
