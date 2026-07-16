@@ -192,7 +192,7 @@ export default function Home() {
           
           <div className="flex animate-marquee whitespace-nowrap opacity-100 transition-opacity duration-300" style={{ animationDuration: '40s' }}>
             {[...Array(2)].map((_, i) => (
-              <div key={i} className="flex items-center gap-16 mx-8">
+              <div key={i} className="flex items-center gap-16 mx-8 shrink-0">
                 <img src="/logos/Acadia_rgb_primary_gradient.png" alt="Acadia" className="h-12 w-auto object-contain shrink-0 rounded" />
                 <img src="/logos/Akeso.svg" alt="Akeso" className="h-12 w-auto object-contain shrink-0 rounded" />
                 <img src="/logos/Allergan_logo.svg" alt="Allergan" className="h-12 w-auto object-contain shrink-0 rounded" />
