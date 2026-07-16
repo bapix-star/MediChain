@@ -215,10 +215,13 @@ export default function Home() {
             </div>
 
             {/* Animated Slogan below hero */}
-            <div className="mt-20 mb-8 text-center animate-fade-in-up" style={{ animationDelay: '300ms' }}>
-              <p className="font-label-caps text-sm md:text-base font-bold tracking-[0.3em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary bg-[length:200%_auto] animate-gradient-text drop-shadow-sm">
-                Trusted by 100+ Global Pharmaceutical Leaders & Manufacturers
-              </p>
+            <div className="mt-12 -mb-6 text-center animate-fade-in-up relative z-20" style={{ animationDelay: '300ms' }}>
+              <div className="inline-flex items-center gap-3 px-6 md:px-8 py-3 rounded-full bg-surface-container-lowest/60 backdrop-blur-md border border-white/50 shadow-xl shadow-primary/5">
+                <span className="material-symbols-outlined text-secondary animate-pulse" style={{ fontVariationSettings: "'FILL' 1" }}>verified_user</span>
+                <p className="font-label-caps text-xs md:text-sm font-bold tracking-[0.2em] md:tracking-[0.25em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary bg-[length:200%_auto] animate-gradient-text drop-shadow-sm mt-0.5">
+                  Trusted by 100+ Global Pharmaceutical Leaders
+                </p>
+              </div>
             </div>
             
           </div>
