@@ -79,6 +79,7 @@ The contracts have been successfully deployed and initialized on the Stellar Tes
 **Recent Transactions:**
 - RBAC Initialization: [7f79a3280b8bbbafa0179e81c8b5effcff121466849a90447df69ec27f5fea52](https://stellar.expert/explorer/testnet/tx/7f79a3280b8bbbafa0179e81c8b5effcff121466849a90447df69ec27f5fea52)
 - Core Cross-Contract Initialization: [0cd0178d0d97af9c7a5991e2ada77be3cb9c63eab1ca2b173af8e1ea5a0d875f](https://stellar.expert/explorer/testnet/tx/0cd0178d0d97af9c7a5991e2ada77be3cb9c63eab1ca2b173af8e1ea5a0d875f)
+- **Contract Call (Mint Batch)**: [bb18d4d7a1286b51eb3fa54e5904fcbe65e04dfa8b8cf9311dc05634b3e813f4](https://stellar.expert/explorer/testnet/tx/bb18d4d7a1286b51eb3fa54e5904fcbe65e04dfa8b8cf9311dc05634b3e813f4)
 
 ---
 

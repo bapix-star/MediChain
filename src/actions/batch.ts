@@ -49,7 +49,20 @@ export async function createBatch(data: {
 
     return { success: true, batch, items: createdItems };
   } catch (error) {
-    console.error("Error creating batch:", error);
-    return { success: false, error: "Failed to create batch" };
+    console.error("Failed to create batch:", error);
+    return { success: false, error: "Database error" };
+  }
+}
+
+export async function getLatestBatches(limit: number = 20) {
+  try {
+    const batches = await prisma.batch.findMany({
+      orderBy: { createdAt: "desc" },
+      take: limit,
+    });
+    return { success: true, batches };
+  } catch (error) {
+    console.error("Failed to fetch batches:", error);
+    return { success: false, error: "Database error", batches: [] };
   }
 }
