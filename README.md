@@ -153,6 +153,31 @@ To achieve a seamless, Web2-like user experience while maintaining Web3 immutabi
 
 ---
 
+## 📁 Project Directory Structure
+
+```text
+medichain/
+├── contracts/                  # Soroban Smart Contracts Workspace
+│   ├── medichain-core/         # Contract 1: Core Supply Chain Logic
+│   ├── medichain-manufacturer/ # Contract 2: RBAC Registry for Manufacturers
+│   ├── Cargo.toml              # Rust Workspace configuration
+│   └── deploy.sh               # Bash script for testnet deployment
+├── src/                        # Next.js Frontend & Backend Application
+│   ├── actions/                # Next.js Server Actions (Off-chain Logic)
+│   ├── app/                    # Next.js App Router (Pages & API Routes)
+│   ├── components/             # Reusable UI elements (shadcn/ui, layouts)
+│   ├── lib/                    # Shared utilities (Prisma singleton, utils)
+│   ├── store/                  # Zustand global state (Wallet connections)
+│   └── test/                   # Vitest suite for UI & component tests
+├── prisma/                     # PostgreSQL Database Schema
+├── public/                     # Static assets
+├── demo-img/                   # Screenshots for documentation
+├── package.json                # NPM Dependencies
+└── README.md                   # Project Documentation
+```
+
+---
+
 ## 🛡️ Contract Addresses & Verifiable Links
 
 The contracts have been successfully deployed and initialized on the Stellar Testnet!
