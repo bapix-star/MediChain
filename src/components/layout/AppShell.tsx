@@ -141,7 +141,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <div className="flex flex-col gap-y-4 h-full">
           <div className="mb-8">
             <Logo className="mb-2" />
-            <p className="font-body-sm text-body-sm text-on-surface-variant ml-[52px]">Pharmacy POS</p>
           </div>
           
           <div className="flex flex-col gap-2 flex-grow">
@@ -199,7 +198,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </div>
         </div>
 
-          <div className="flex items-center gap-4 flex-1 justify-end">
+          <div className="flex items-center gap-2 sm:gap-4 flex-1 justify-end">
           <button className="text-on-surface-variant hover:bg-surface-container-high/50 transition-colors p-2 rounded-full hidden md:block">
             <span className="material-symbols-outlined">notifications</span>
           </button>
@@ -209,10 +208,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               <span className="material-symbols-outlined">account_circle</span>
             </Link>
           )}
-
-          <button className="text-on-surface-variant hover:bg-surface-container-high/50 transition-colors p-2 rounded-full md:hidden">
-            <span className="material-symbols-outlined">search</span>
-          </button>
+          
           
           <WalletConnect />
           

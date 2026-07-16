@@ -73,15 +73,22 @@ export default async function ExplorerDashboard() {
             </div>
             <div className="space-y-4 flex-1">
               <div>
-                <span className="font-label-caps text-label-caps text-on-surface-variant block mb-1">Horizon Node</span>
+                <span className="font-label-caps text-label-caps text-on-surface-variant block mb-1">Manufacturer Registry (RBAC)</span>
                 <div className="flex items-center justify-between bg-surface-container-lowest border border-outline-variant/30 px-3 py-2 rounded-lg">
-                  <span className="font-data-mono text-data-mono text-on-surface text-xs truncate mr-2">horizon-testnet.stellar.org</span>
-                  <button className="text-on-surface-variant hover:text-primary"><span className="material-symbols-outlined text-[16px]">content_copy</span></button>
+                  <span className="font-data-mono text-data-mono text-on-surface text-[10px] sm:text-xs truncate mr-2" title="CDSYRCSBV724HG35LB7HMR7DR7ZXVTCZ763WSSP7BIPGRQNHAL3LGI53">CDSYRCSBV724HG35LB7HMR7DR7ZXVTCZ763WSSP7BIPGRQNHAL3LGI53</span>
+                  <a href="https://stellar.expert/explorer/testnet/contract/CDSYRCSBV724HG35LB7HMR7DR7ZXVTCZ763WSSP7BIPGRQNHAL3LGI53" target="_blank" rel="noopener noreferrer" className="text-on-surface-variant hover:text-primary transition-colors flex-shrink-0">
+                    <span className="material-symbols-outlined text-[16px]">open_in_new</span>
+                  </a>
                 </div>
               </div>
               <div>
-                <span className="font-label-caps text-label-caps text-on-surface-variant block mb-1">Asset Protocol</span>
-                <span className="font-data-mono text-data-mono text-on-surface">ManageData (MediChain_Batch)</span>
+                <span className="font-label-caps text-label-caps text-on-surface-variant block mb-1">Core Supply Chain Contract</span>
+                <div className="flex items-center justify-between bg-surface-container-lowest border border-outline-variant/30 px-3 py-2 rounded-lg">
+                  <span className="font-data-mono text-data-mono text-on-surface text-[10px] sm:text-xs truncate mr-2" title="CCSVYELDMLD53UFQLKAE3JY5P23UKUCYLWYJIKEVHODXOOLVPWWTSOE7">CCSVYELDMLD53UFQLKAE3JY5P23UKUCYLWYJIKEVHODXOOLVPWWTSOE7</span>
+                  <a href="https://stellar.expert/explorer/testnet/contract/CCSVYELDMLD53UFQLKAE3JY5P23UKUCYLWYJIKEVHODXOOLVPWWTSOE7" target="_blank" rel="noopener noreferrer" className="text-on-surface-variant hover:text-primary transition-colors flex-shrink-0">
+                    <span className="material-symbols-outlined text-[16px]">open_in_new</span>
+                  </a>
+                </div>
               </div>
               <div>
                 <span className="font-label-caps text-label-caps text-on-surface-variant block mb-1">Ledger Status</span>
