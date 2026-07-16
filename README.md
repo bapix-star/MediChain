@@ -68,11 +68,12 @@
 The global pharmaceutical supply chain is plagued by counterfeit medicines, costing billions and endangering lives. Traditional QR codes can be easily cloned by malicious actors (e.g., printing the same QR code on 1,000 fake medicine packages), making standard tracking systems useless against coordinated fraud.
 
 ### The Solution: MediChain
-MediChain introduces a **Digital Product Passport (DPP)**. Every medicine batch is cryptographically secured on the Stellar blockchain:
-- **Tamper-Proof Batches**: Manufacturers mint medicine batches as unique, immutable records on-chain.
+MediChain introduces a **Digital Product Passport (DPP)**. Every medicine batch is cryptographically secured on the Stellar blockchain, ensuring absolute provenance while off-chain scans track the lifecycle.
+- **Tamper-Proof Batches**: Manufacturers mint medicine batches as unique, immutable records on-chain (storing the Merkle root and Metadata hash).
 - **Dual-Contract Architecture**: We separate Role-Based Access Control from supply chain logic. Only verified, registered manufacturers can mint medicine.
-- **Counterfeit Anomaly Detection**: If a malicious actor clones a QR code, our anomaly algorithm intercepts it by analyzing scan events (e.g., detecting impossible travel time if a medicine is scanned in two distant cities within 60 minutes).
-- **Consumer Verification**: Patients and retailers can scan the QR code to instantly read the provenance and verify authenticity on-chain.
+- **Pharmacy Dispensing & Reuse Prevention**: When a registered pharmacy dispenses a medicine to a patient, the item is permanently marked as `SOLD`. If a malicious actor clones that QR code and attempts to sell or scan it again, the system instantly triggers an **"ALREADY DISPENSED"** counterfeit alert, proving the physical item is either a clone or an illegal reuse.
+- **Counterfeit Anomaly Detection**: Beyond reuse, the system intercepts cloned QR codes by analyzing real-time scan events (e.g., detecting impossible travel time if the same QR is scanned in two distant locations within 60 minutes).
+- **Consumer Verification**: Patients can scan the QR code to instantly read the provenance, verify authenticity on the Stellar ledger, and ensure the medicine hasn't been recalled or previously dispensed.
 
 ---
 
