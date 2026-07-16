@@ -135,7 +135,21 @@ sequenceDiagram
 - **Smart Contracts**: Rust (Soroban SDK v25.3.1)
 - **Network**: Stellar Testnet
 - **Database**: Next.js Server Actions + Prisma + PostgreSQL
-- **Testing**: Vitest (Frontend), Cargo Test (Contracts)
+---
+
+## ⚙️ Techy Overview: How it works under the hood
+
+To achieve a seamless, Web2-like user experience while maintaining Web3 immutability, MediChain leverages a hybrid architecture:
+
+1. **Next.js Server Actions & Prisma**: 
+   - We bypass traditional REST APIs entirely. When a QR code is scanned, Next.js Server Actions (`src/actions/scan.ts`) execute securely on the server.
+   - Prisma ORM interfaces with our PostgreSQL database to record every `TRANSIT` and `SALE` event. This allows us to perform complex, rapid calculations (like the "Impossible Travel Time" anomaly algorithm) off-chain without burdening the user with gas fees for every physical scan.
+2. **Soroban Smart Contracts (Rust)**:
+   - The heavy lifting of **trust** is handled on-chain. The `medichain-core` contract relies on the `medichain-manufacturer` contract via a cross-contract call (`contractimport!`) to assert that the caller's `Address` is whitelisted.
+   - Instead of storing massive amounts of supply chain data on the ledger, we construct a **Merkle Tree** of the batch items and only store the `merkle_root` on-chain. This guarantees data integrity while keeping transaction costs negligible.
+3. **StellarWalletsKit & RPC Integration**:
+   - The frontend uses `StellarWalletsKit` to seamlessly connect to the Freighter extension. When a manufacturer mints a batch, the browser delegates the signing of the XDR payload to the wallet.
+   - We poll the Soroban RPC to fetch live ledger events, ensuring the UI reflects the true on-chain state instantly.
 
 ---
 
