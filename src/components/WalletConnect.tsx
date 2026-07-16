@@ -29,7 +29,7 @@ export function WalletConnect() {
             <span className="font-data-mono text-data-mono font-medium text-sm text-on-surface">
               {address.substring(0, 4)}...{address.substring(address.length - 4)}
             </span>
-            <span className="text-[10px] font-semibold text-secondary">
+            <span className="text-[10px] font-semibold text-secondary hidden sm:block">
               {balance ? `${balance} XLM` : "0.00 XLM"}
             </span>
           </div>

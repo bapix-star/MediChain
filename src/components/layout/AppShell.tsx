@@ -183,12 +183,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       {/* TopAppBar */}
       <header className="bg-surface/80 backdrop-blur-xl docked full-width top-0 sticky z-50 border-b border-outline-variant/30 shadow-sm flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 h-16">
         <div className="flex items-center gap-2 md:hidden">
-          <button 
-            onClick={() => setIsSidebarOpen(true)}
-            className="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors"
-          >
-            <span className="material-symbols-outlined">menu</span>
-          </button>
           <Logo />
         </div>
 
@@ -221,6 +215,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </button>
           
           <WalletConnect />
+          
+          <button 
+            onClick={() => setIsSidebarOpen(true)}
+            className="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors md:hidden"
+          >
+            <span className="material-symbols-outlined">menu</span>
+          </button>
         </div>
       </header>
 

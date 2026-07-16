@@ -362,7 +362,11 @@ export default function Home() {
           </div>
           
           <div className="relative max-w-4xl mx-auto">
-            <DnaStrand />
+            <div className="hidden md:block">
+              <DnaStrand />
+            </div>
+            {/* Simple vertical line for mobile */}
+            <div className="absolute left-8 top-0 bottom-0 w-[2px] -ml-[1px] bg-outline-variant/30 md:hidden z-0"></div>
             
             <div className="relative flex items-center justify-between mb-12 flex-col md:flex-row animate-fade-in-up" style={{ animationDelay: '100ms' }}>
               <div className="w-full md:w-5/12 pl-16 md:pl-0 md:text-right md:pr-12">
