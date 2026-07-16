@@ -198,21 +198,21 @@ The contracts have been successfully deployed and initialized on the Stellar Tes
 
 ### 🌟 Hero & Dashboard
 *A sleek, professional dashboard. Connect your Freighter wallet to sign and submit directly to the Stellar network.*
-**(✅ Fulfills Level 1 Requirement: Wallet connected state & Balance displayed)**
+**(✅ Showcasing Wallet Connection State & Live XLM Balance Retrieval)**
 <div align="center">
   <img src="demo-img/hero-showingconnected-balance-wallet.png" alt="Hero Dashboard" width="800"/>
 </div>
 
 ### 🧰 Multi-Wallet Support
 *Seamlessly connect using your preferred Stellar wallet via StellarWalletsKit.*
-**(✅ Fulfills Level 2 Requirement: Screenshot showing wallet options available)**
+**(✅ Supporting Multiple Wallet Provider Options)**
 <div align="center">
   <img src="demo-img/multiwallet-connect.png" alt="Multi Wallet Options" width="800"/>
 </div>
 
 ### 📜 Batch Registry & QR Generation
 *Mint highly-secure medicine batches. The system generates unique, verifiable QR codes for every individual medicine unit.*
-**(✅ Fulfills Level 1 Requirement: Successful testnet transaction & Transaction result shown to the user)**
+**(✅ Showcasing a Successful Testnet Transaction with Real-time User Feedback)**
 <div align="center">
   <img src="demo-img/batch-registry.png" alt="Batch Registry" width="800"/>
 </div>
@@ -225,7 +225,7 @@ The contracts have been successfully deployed and initialized on the Stellar Tes
 
 ### 📱 Fully Mobile Responsive
 *The entire application, including complex dashboards, sidebars, and tables, is completely optimized for seamless mobile usage.*
-**(✅ Fulfills Level 3 Requirement: Screenshot showing Mobile responsive UI)**
+**(✅ Built with a Fully Mobile-Responsive Architecture)**
 <div align="center">
   <img src="demo-img/mobile-ui-1.png" alt="Mobile View 1" width="300"/>
   <img src="demo-img/mobile-ui-2.png" alt="Mobile View 2" width="300"/>
@@ -239,7 +239,7 @@ The contracts have been successfully deployed and initialized on the Stellar Tes
 
 ### 🧪 Automated Testing Suite
 *Comprehensive frontend testing using Vitest ensures platform stability. We rigorously test layouts, dashboards, and logic.*
-**(✅ Fulfills Level 3 Requirement: Screenshot showing Test output with 3+ passing tests)**
+**(✅ Ensuring Stability with Comprehensive Automated Testing Suites)**
 <div align="center">
   <img src="demo-img/test-1.png" alt="Test Suite" width="400"/>
   <img src="demo-img/test-2.png" alt="Test Results" width="400"/>
@@ -247,7 +247,7 @@ The contracts have been successfully deployed and initialized on the Stellar Tes
 
 ### 🚀 CI/CD Pipeline
 *Automated GitHub Actions trigger on every push, performing blazingly fast `cargo binstall` Rust compilation and full frontend validation.*
-**(✅ Fulfills Level 3 Requirement: Screenshot showing CI/CD pipeline running)**
+**(✅ Fully Automated CI/CD Deployment Pipeline via GitHub Actions)**
 <div align="center">
   <img src="demo-img/CI_CD-pipeline.png" alt="CI/CD Pipeline" width="800"/>
 </div>
