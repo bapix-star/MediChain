@@ -84,7 +84,11 @@ export default function BatchDetailClient({ batch }: BatchDetailClientProps) {
               </button>
             </div>
             
-            <p className="text-on-surface-variant font-body-sm mb-4">Below are the unique QR codes for each physical unit in this batch. They can be printed and attached to packaging.</p>
+            <p className="text-on-surface-variant font-body-sm mb-4">
+              Below are the unique QR codes for each physical unit in this batch. They can be printed and attached to packaging. 
+              <br/><br/>
+              <span className="font-semibold text-primary">Instruction:</span> Scan a QR code using your mobile device or scanner to verify the product's authenticity and provenance on-chain.
+            </p>
             
             <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar">
               {/* Isolated printable area with strict hex colors */}
