@@ -185,20 +185,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <Logo />
         </div>
 
-        {/* Global Search Desktop */}
-        <div className="hidden md:flex flex-1 max-w-2xl mx-auto">
-          <div className="relative w-full group">
-            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant z-10">search</span>
-            <input 
-              type="text" 
-              className="w-full bg-surface-container-lowest border border-outline-variant/50 text-on-surface rounded-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-shadow text-body-sm font-body-sm shadow-sm hover:shadow-md" 
-              placeholder="Search TxHash, Block, ProductID..." 
-            />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-outline text-xs font-data-mono bg-surface-container px-2 py-0.5 rounded border border-outline-variant/30">/</span>
-          </div>
-        </div>
-
-          <div className="flex items-center gap-2 sm:gap-4 flex-1 justify-end">
+        {/* Search removed as per clean UI requirements */}
+        <div className="flex items-center gap-2 sm:gap-4 flex-1 justify-end">
           <button className="text-on-surface-variant hover:bg-surface-container-high/50 transition-colors p-2 rounded-full hidden md:block">
             <span className="material-symbols-outlined">notifications</span>
           </button>
