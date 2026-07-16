@@ -144,7 +144,7 @@ export default function Home() {
         <section className="relative w-full min-h-[819px] flex items-center pt-16 md:pt-24 pb-16 px-margin-mobile md:px-margin-desktop overflow-hidden">
           
           <div className="relative z-10 w-full max-w-container-max mx-auto">
-            <div className="glass-panel p-8 md:p-12 rounded-2xl shadow-xl max-w-7xl mx-auto w-full animate-fade-in-up">
+            <div className="glass-panel p-8 md:p-12 rounded-2xl shadow-xl w-full animate-fade-in-up">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div className="flex flex-col gap-6">
                   <div className="inline-flex items-center gap-2 bg-primary/10 text-primary font-label-caps text-label-caps px-3 py-1 rounded-full w-fit animate-fade-in-up" style={{ animationDelay: '100ms' }}>
