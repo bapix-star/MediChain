@@ -6,15 +6,17 @@ import { toast } from "sonner";
 import { createBatch } from "@/actions/batch";
 import { getProfile, updateProfile } from "@/actions/profile";
 import { AppShell } from "@/components/layout/AppShell";
-import { Horizon, TransactionBuilder, Networks, Operation } from "@stellar/stellar-sdk";
+import { Horizon, TransactionBuilder, Networks, Operation, Contract, Address, nativeToScVal, rpc } from "@stellar/stellar-sdk";
 import QRCode from "react-qr-code";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
 const server = new Horizon.Server("https://horizon-testnet.stellar.org");
+const sorobanServer = new rpc.Server("https://soroban-testnet.stellar.org");
+const CORE_CONTRACT_ID = "CCSVYELDMLD53UFQLKAE3JY5P23UKUCYLWYJIKEVHODXOOLVPWWTSOE7";
 
 export default function ManufacturerDashboard() {
-  const { address, isConnected, signTransaction, submitTransaction } = useWalletStore();
+  const { address, isConnected, signTransaction, submitSorobanTransaction } = useWalletStore();
   const [loading, setLoading] = useState(false);
   const [profile, setProfile] = useState<any>(null);
   const [fetchingProfile, setFetchingProfile] = useState(false);
@@ -79,19 +81,30 @@ export default function ManufacturerDashboard() {
       toast.info("Awaiting wallet signature...");
       
       const account = await server.loadAccount(address);
-      const tx = new TransactionBuilder(account, { fee: "1000", networkPassphrase: Networks.TESTNET })
-        .addOperation(Operation.manageData({
-          name: "MediChain_Batch",
-          value: batchNumber.substring(0, 64)
-        }))
+      const contract = new Contract(CORE_CONTRACT_ID);
+      const merkleRoot = "0x" + Math.random().toString(16).substring(2, 10);
+      const timestamp = Math.floor(Date.now() / 1000);
+      
+      const args = [
+        new Address(address).toScVal(),
+        nativeToScVal(batchNumber, { type: 'string' }),
+        nativeToScVal(merkleRoot, { type: 'string' }),
+        nativeToScVal(batchNumber.substring(0, 32), { type: 'string' }),
+        nativeToScVal(timestamp, { type: 'u64' })
+      ];
+
+      let tx = new TransactionBuilder(account, { fee: "100000", networkPassphrase: Networks.TESTNET })
+        .addOperation(contract.call("mint_batch", ...args))
         .setTimeout(300)
         .build();
+
+      tx = await sorobanServer.prepareTransaction(tx) as any;
 
       const signedXdr = await signTransaction(tx.toXDR());
       
       toast.info("Submitting transaction to Stellar network...");
 
-      const txResult = await submitTransaction(signedXdr);
+      const txResult = await submitSorobanTransaction(signedXdr);
       const txHash = txResult.hash;
 
       toast.success(
@@ -114,7 +127,7 @@ export default function ManufacturerDashboard() {
         quantity: parseInt(formData.get("quantity") as string),
         manufacturingDate: new Date(formData.get("manufacturingDate") as string),
         expiryDate: new Date(formData.get("expiryDate") as string),
-        merkleRoot: "0x" + Math.random().toString(16).substring(2, 10),
+        merkleRoot: merkleRoot,
         blockchainHash: txHash,
         ownerAddress: address,
       });

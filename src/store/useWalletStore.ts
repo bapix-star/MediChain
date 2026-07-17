@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { StellarWalletsKit, Networks } from "@creit.tech/stellar-wallets-kit";
 import { defaultModules } from "@creit.tech/stellar-wallets-kit/modules/utils";
-import { Horizon, TransactionBuilder } from "@stellar/stellar-sdk";
+import { Horizon, TransactionBuilder, rpc } from "@stellar/stellar-sdk";
 
 // Initialize the kit globally
 if (typeof window !== "undefined") {
@@ -13,6 +13,7 @@ if (typeof window !== "undefined") {
 }
 
 const server = new Horizon.Server("https://horizon-testnet.stellar.org");
+const sorobanServer = new rpc.Server("https://soroban-testnet.stellar.org");
 
 interface WalletState {
   address: string | null;
@@ -26,6 +27,7 @@ interface WalletState {
   refreshBalance: () => Promise<void>;
   signTransaction: (xdr: string) => Promise<string>;
   submitTransaction: (xdr: string) => Promise<any>;
+  submitSorobanTransaction: (xdr: string) => Promise<any>;
 }
 
 export const useWalletStore = create<WalletState>()(
@@ -104,6 +106,28 @@ export const useWalletStore = create<WalletState>()(
         const tx = TransactionBuilder.fromXDR(signedXdr, Networks.TESTNET);
         const result = await server.submitTransaction(tx as any);
         return result;
+      },
+
+      submitSorobanTransaction: async (signedXdr: string) => {
+        const parsedTx = TransactionBuilder.fromXDR(signedXdr, Networks.TESTNET) as any;
+        const sendResponse = await sorobanServer.sendTransaction(parsedTx);
+        if (sendResponse.status === 'ERROR') {
+          throw new Error(`Transaction failed: ${(sendResponse as any).errorResult?.toXDR("base64") || JSON.stringify(sendResponse)}`);
+        }
+
+        // Poll for confirmation
+        const maxAttempts = 20;
+        for (let i = 0; i < maxAttempts; i++) {
+          const txResponse = await sorobanServer.getTransaction(sendResponse.hash);
+          if (txResponse.status !== 'NOT_FOUND') {
+            if (txResponse.status === 'FAILED') {
+              throw new Error("Transaction failed on chain");
+            }
+            return { hash: sendResponse.hash, ...txResponse };
+          }
+          await new Promise(resolve => setTimeout(resolve, 3000));
+        }
+        throw new Error("Transaction polling timed out");
       },
     }),
     {
